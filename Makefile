@@ -152,6 +152,9 @@ build: ## Make the image customized appropriately
 	make base/private_distro_versions.$(VERSION)
 	-rm base/private_image_info.$(VERSION)
 	make base/private_image_info.$(VERSION)
+	docker create --name tmp $(PRIVATE_REG)$(IMAGE)$(PRIVATE_TAG)
+	docker cp tmp:/home/jovyan/permissions_checksum.txt ./permissions_checksum.txt
+	docker rm tmp
 
 push: IMAGE = $(PRIVATE_IMAGE)
 push: DARGS ?=
