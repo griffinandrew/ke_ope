@@ -20,6 +20,8 @@ jobs:
           make build
       - name: run checksum #creates var with checksum value to be compared 
         run: |
+          sha256sum > checksum.txt
+          cat checksum.txt
           echo "VERIFYING IMAGE CHECKSUM"
           PERMISSIONS_CHECKSUM=$( cat permissions_checksum.txt )
           echo "displaying the pulled image checksum: $PERMISSIONS_CHECKSUM "
