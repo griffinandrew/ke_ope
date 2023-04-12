@@ -48,7 +48,7 @@ jobs:
               backcall==0.2.0)
                 echo "CORRECT version of package: $line"
                 ;;
-                beautifulsoup4==4.12.1)
+              beautifulsoup4==4.12.2)
                 echo "CORRECT version of package: $line"
                 ;;
               certifi==2022.12.7)
@@ -69,7 +69,7 @@ jobs:
               cycler==0.11.0)
                 echo "CORRECT version of package: $line"
                 ;;
-              debugpy==1.6.6)
+              debugpy==1.6.7)
                 echo "CORRECT version of package: $line"
                 ;;
               decorator==5.1.1)
@@ -96,7 +96,7 @@ jobs:
               imagesize==1.4.1)
                 echo "CORRECT version of package: $line"
                 ;;
-              importlib-metadata==6.1.0)
+              importlib-metadata==6.3.0)
                 echo "CORRECT version of package: $line"
                 ;;
               importlib-resources==5.12.0)
@@ -219,7 +219,7 @@ jobs:
               pydata-sphinx-theme==0.13.3)
                 echo "CORRECT version of package: $line"
                 ;;
-              Pygments==2.14.0)
+              Pygments==2.15.0)
                 echo "CORRECT version of package: $line"
                 ;;
               pyparsing==3.0.9)
