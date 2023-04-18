@@ -25,4 +25,10 @@ jobs:
 
           START=$(docker inspect --format='{{.State.StartedAt}}' stable-base-ope-latest)
           STOP=$(docker inspect --format='{{.State.FinishedAt}}' stable-base-ope-latest) 
-
+          echo $START
+          echo $STOP
+          START_TIMESTAMP=$(date --date=$START +%s)
+          STOP_TIMESTAMP=$(date --date=$STOP +%s)
+          echo $START_TIMESTAMP
+          echo $STOP_TIMESTAMP
+          echo $(($STOP_TIMESTAMP-$START_TIMESTAMP)) seconds
