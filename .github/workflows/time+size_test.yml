@@ -21,7 +21,7 @@ jobs:
       - name: get the size #creates var with checksum value to be compared 
         run: |
           docker image ls
-          docker container inspect quay.io/rh_ee_keli/ucsls:table-base-ope-latest
+          docker container inspect quay.io/rh_ee_keli/ucsls:stable-base-ope-latest
 
           START=$(docker inspect --format='{{.State.StartedAt}}' stable-base-ope-latest)
           STOP=$(docker inspect --format='{{.State.FinishedAt}}' stable-base-ope-latest) 
