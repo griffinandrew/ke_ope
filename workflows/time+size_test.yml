@@ -19,4 +19,5 @@ jobs:
         run: |
           time make build
       - name: run checksum #creates var with checksum value to be compared 
-          docker image ls -s
+        run: |
+          docker image ls -s	
