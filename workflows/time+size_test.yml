@@ -18,6 +18,8 @@ jobs:
       - name: time make build # makes the container image build and then creates var with checksum value to be compared 
         run: |
           time make build
-      - name: run checksum #creates var with checksum value to be compared 
+      - name: get the size #creates var with checksum value to be compared 
         run: |
-          docker image ls -s	
+          docker image ls
+          docker container inspect base-ope-image
+
