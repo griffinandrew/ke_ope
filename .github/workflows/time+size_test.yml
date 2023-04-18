@@ -21,5 +21,8 @@ jobs:
       - name: get the size #creates var with checksum value to be compared 
         run: |
           docker image ls
-          docker container inspect base-ope-image
+          docker container inspect stable-base-ope-latest
+
+          START=$(docker inspect --format='{{.State.StartedAt}}' stable-base-ope-latest)
+          STOP=$(docker inspect --format='{{.State.FinishedAt}}' stable-base-ope-latest) 
 
