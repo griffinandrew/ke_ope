@@ -17,16 +17,16 @@ jobs:
           pip install jupyter-book matplotlib numpy pandas
       - name: time make build # makes the container image build and then creates var with checksum value to be compared 
         run: |
-          time make build
+          time make build >> build.txt
       - name: get the size #creates var with checksum value to be compared 
         run: |
-          docker image ls
-          docker images quay.io/rh_ee_keli/ucsls
+                #docker image ls
+                #docker images quay.io/rh_ee_keli/ucsls
 
-          docker ps -a 
-          echo "running image here"
+                #docker ps -a 
+          echo "RUN CONTAINER"
           docker run -d --name stable quay.io/rh_ee_keli/ucsls:stable-base-ope-latest 
-          echo "listing again"
+          echo "LIST RUNNING CONTAINERS"
           docker ps -a
 
           IMAGE_ID=$( docker images --format "{{.ID}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest )
@@ -39,9 +39,8 @@ jobs:
 
 
 
-          TIME=$( docker history --format "{{.CreatedAt}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest | tail -1 | xargs -I % sh -c 'echo $(( $(date -u -d % +%s) - $(date -u -d "$(docker history --format "{{.CreatedAt}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest | head -2 | tail -1)" +%s) )) seconds' )
+          #TIME=$( docker history --format "{{.CreatedAt}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest | tail -1 | xargs -I % sh -c 'echo $(( $(date -u -d % +%s) - $(date -u -d "$(docker history --format "{{.CreatedAt}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest | head -2 | tail -1)" +%s) )) seconds' )
                 
-
           echo "time = $TIME"
           START=$(docker inspect --format "{{.State.StartedAt}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest)
           STOP=$(docker inspect --format "{{.State.FinishedAt}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest) 
@@ -54,3 +53,9 @@ jobs:
           echo $(($STOP_TIMESTAMP-$START_TIMESTAMP)) seconds
 
           docker stop stable
+
+          TIME=$( cat build.txt ) 
+
+          T=$(echo $TIME | grep "real* ")
+
+          echo $T
