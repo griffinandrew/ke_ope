@@ -21,7 +21,8 @@ jobs:
       - name: get the size #creates var with checksum value to be compared 
         run: |
           docker image ls
-          docker ps
+          docker ps -a 
+          
           
           docker container inspect quay.io/rh_ee_keli/ucsls:stable-base-ope-latest
 
