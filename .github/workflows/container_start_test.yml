@@ -31,8 +31,14 @@ jobs:
           echo "listing again"
           
           docker ps -a
+                
 
-          docker ps | grep *stable-base-ope-latest*
+          STATE=$ ( docker inspect --format='{{.State.Status}}' stable )
+          echo "state = $STATE"
+
+          STATE2=$ ( docker inspect --format='{{.State.Status}}' quay.io/rh_ee_keli/ucsls:stable-base-ope-latest )
+          echo "state2 = $STATE2"
+          #docker ps | grep *stable-base-ope-latest*
 
           #IMAGE_ID=$(docker images --filter=reference=stable --format "{{.ID}}")
           #echo "image id =  $IMAGE_ID"

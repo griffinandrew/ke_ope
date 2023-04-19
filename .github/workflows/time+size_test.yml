@@ -39,12 +39,23 @@ jobs:
           echo "size = $SIZE"
 
           SZ=$( docker images --format "{{.Repository}} {{.Size}}" stable )
-          
+         
+          SZE=$( docker images --format "{{.Repository}} {{.Size}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest )
+
           echo "SZ = $SZ" 
 
+          echo "SZE = $SZE"
           S=$( docker inspect --type=image --format='{{.Size}}' quay.io/rh_ee_keli/ucsls:stable-base-ope-latest)
           echo "s = $S"
           echo "Size: $(echo "scale=2; $S / 1024 / 1024 / 1024" | bc) GB"      
+          
+
+          GB=$((S / 1024 / 1024 / 1024))
+          MB=$((S / 1024 / 1024 % 1024))
+          KB=$((S / 1024 % 1024))
+          B=$((S % 1024))
+          echo "Size: $GB GB $MB MB $KB KB $B bytes"
+          
           #docker stop stable
           # docker container inspect quay.io/rh_ee_keli/ucsls:stable-base-ope-latest
           
