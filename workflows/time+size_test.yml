@@ -3,7 +3,7 @@ on:
   push:
     branches: base-ope-image
 jobs:
-  time + size:
+  time_and_size:
     runs-on: ubuntu-latest #use the latest ubuntu container image 
     steps:
       - uses: actions/checkout@v3
