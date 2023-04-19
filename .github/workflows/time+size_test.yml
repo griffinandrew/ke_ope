@@ -18,6 +18,14 @@ jobs:
       - name: time make build # makes the container image build and then creates var with checksum value to be compared 
         run: |
           time make build >> build.txt
+          # Run the "time make build" command and capture the output
+          output=$(time make build 2>&1)
+          #
+          # # Extract the elapsed time value from the output
+          BUILD_TIME=$(echo "$output" | grep "real" | awk '{print $2}')
+          #
+          # # Print the elapsed time value
+          echo "Build time: $BUILD_TIME seconds"
       - name: get the size #creates var with checksum value to be compared 
         run: |
           #docker image ls
@@ -52,8 +60,8 @@ jobs:
           cat ./build.txt
 
 
-          TIME=$( cat build.txt ) 
+          #TIME=$( cat build.txt ) 
 
-          T=$(echo $TIME | grep "real* ")
+          #T=$(echo $TIME | grep "real* ")
 
-          echo $T
+          #echo $T
