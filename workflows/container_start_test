@@ -1,0 +1,58 @@
+name: container start test
+on:
+  push:
+    branches: base-ope-image
+jobs:
+  container start:
+    runs-on: ubuntu-latest #use the latest ubuntu container image 
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4 #use action to install python
+        with:
+          python-version: "3.9"
+      - name: Install dependencies #requirements docs unable to read, hard installing dependencies 
+        run: |
+          #pip install -r requirements.txt    
+          pip install jupyter-book matplotlib numpy pandas
+      - name: time make build # makes the container image build and then creates var with checksum value to be compared 
+        run: |
+          make build
+      - name: get the size #creates var with checksum value to be compared 
+        run: |
+          #docker image ls
+          #docker images quay.io/rh_ee_keli/ucsls
+
+          #docker ps -a 
+          echo "running image here"
+          docker run -d --name stable quay.io/rh_ee_keli/ucsls:stable-base-ope-latest 
+          sleep 7 #sleep for 7s to see if image starts properly
+          
+          echo "listing again"
+          
+          docker ps -a
+
+          #IMAGE_ID=$(docker images --filter=reference=stable --format "{{.ID}}")
+          #echo "image id =  $IMAGE_ID"
+
+          #ID=$( docker images -q )
+          #echo "id = $ID"
+          #SIZE= $(docker images --format="{{.Size}}" stable)
+          
+          #echo "size = $SIZE"
+        
+                
+          #docker stop stable
+          # docker container inspect quay.io/rh_ee_keli/ucsls:stable-base-ope-latest
+
+         # START=$(docker inspect --format='{{.State.StartedAt}}' stable)
+          #STOP=$(docker inspect --format='{{.State.FinishedAt}}' stable) 
+          #echo $START
+          #echo $STOP
+         # START_TIMESTAMP=$(date --date=$START +%s)
+         # STOP_TIMESTAMP=$(date --date=$STOP +%s)
+         # echo $START_TIMESTAMP
+         # echo $STOP_TIMESTAMP
+         # echo $(($STOP_TIMESTAMP-$START_TIMESTAMP)) seconds
+
+          docker stop stable
