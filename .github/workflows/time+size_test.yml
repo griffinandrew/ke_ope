@@ -40,14 +40,18 @@ jobs:
 
           SZ=$( docker images --format "{{.Repository}} {{.Size}}" stable )
           
-          echo $SZ
+          echo "SZ = $SZ" 
+
+          S=$( docker inspect --type=image --format='{{.Size}}' quay.io/rh_ee_keli/ucsls:stable-base-ope-latest)
+          echo "s = $S"
                 
           #docker stop stable
           # docker container inspect quay.io/rh_ee_keli/ucsls:stable-base-ope-latest
           
 
 
-          TIME=$( docker history --format "{{.CreatedAt}}" ubuntu | tail -1 | xargs -I % sh -c 'echo $(( $(date -u -d % +%s) - $(date -u -d "$(docker history --format "{{.CreatedAt}}" ubuntu | head -2 | tail -1)" +%s) )) seconds' )
+
+          TIME=$( docker history --format "{{.CreatedAt}}" stable | tail -1 | xargs -I % sh -c 'echo $(( $(date -u -d % +%s) - $(date -u -d "$(docker history --format "{{.CreatedAt}}" stable | head -2 | tail -1)" +%s) )) seconds' )
                 
           echo "time = $TIME"
           START=$(docker inspect --format='{{.State.StartedAt}}' stable)
