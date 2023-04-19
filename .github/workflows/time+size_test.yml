@@ -47,7 +47,7 @@ jobs:
           
 
 
-         TIME=$( docker history --format "{{.CreatedAt}}" ubuntu | tail -1 | xargs -I % sh -c 'echo $(( $(date -u -d % +%s) - $(date -u -d "$(docker history --format "{{.CreatedAt}}" ubuntu | head -2 | tail -1)" +%s) )) seconds' )
+          TIME=$( docker history --format "{{.CreatedAt}}" ubuntu | tail -1 | xargs -I % sh -c 'echo $(( $(date -u -d % +%s) - $(date -u -d "$(docker history --format "{{.CreatedAt}}" ubuntu | head -2 | tail -1)" +%s) )) seconds' )
                 
           echo "time = $TIME"
           START=$(docker inspect --format='{{.State.StartedAt}}' stable)
