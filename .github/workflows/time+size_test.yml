@@ -57,7 +57,7 @@ jobs:
           #echo $(($STOP_TIMESTAMP-$START_TIMESTAMP)) seconds
           docker stop stable
                 
-          cat ./build.txt
+          #cat ./build.txt
 
 
           #TIME=$( cat build.txt ) 
