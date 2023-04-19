@@ -34,16 +34,22 @@ jobs:
 
           ID=$( docker images -q )
           echo "id = $ID"
-
-          docker stop stable
+          SIZE= $(docker inspect --format='{{.Size}}' stable)
+          
+          echo "size = $SIZE"
+        
+                
+          #docker stop stable
           # docker container inspect quay.io/rh_ee_keli/ucsls:stable-base-ope-latest
 
-          #START=$(docker inspect --format='{{.State.StartedAt}}' stable-base-ope-latest)
-          #STOP=$(docker inspect --format='{{.State.FinishedAt}}' stable-base-ope-latest) 
-          #echo $START
-          #echo $STOP
-          #START_TIMESTAMP=$(date --date=$START +%s)
-          #STOP_TIMESTAMP=$(date --date=$STOP +%s)
-          #echo $START_TIMESTAMP
-          # echo $STOP_TIMESTAMP
-          #echo $(($STOP_TIMESTAMP-$START_TIMESTAMP)) seconds
+          START=$(docker inspect --format='{{.State.StartedAt}}' stable)
+          STOP=$(docker inspect --format='{{.State.FinishedAt}}' stable) 
+          echo $START
+          echo $STOP
+          START_TIMESTAMP=$(date --date=$START +%s)
+          STOP_TIMESTAMP=$(date --date=$STOP +%s)
+          echo $START_TIMESTAMP
+          echo $STOP_TIMESTAMP
+          echo $(($STOP_TIMESTAMP-$START_TIMESTAMP)) seconds
+
+          docker stop stable
