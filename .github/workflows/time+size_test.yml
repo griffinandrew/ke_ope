@@ -34,7 +34,7 @@ jobs:
 
           ID=$( docker images -q )
           echo "id = $ID"
-          SIZE= $(docker inspect --format='{{.Size}}' stable)
+          SIZE= $(docker images --format="{{.Size}}" stable)
           
           echo "size = $SIZE"
         
