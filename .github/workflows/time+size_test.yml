@@ -20,10 +20,9 @@ jobs:
           time make build >> build.txt
       - name: get the size #creates var with checksum value to be compared 
         run: |
-                #docker image ls
-                #docker images quay.io/rh_ee_keli/ucsls
-
-                #docker ps -a 
+          #docker image ls
+          #docker images quay.io/rh_ee_keli/ucsls
+          #docker ps -a 
           echo "RUN CONTAINER"
           docker run -d --name stable quay.io/rh_ee_keli/ucsls:stable-base-ope-latest 
           echo "LIST RUNNING CONTAINERS"
@@ -35,9 +34,6 @@ jobs:
           echo "SZE = $SZE"
           #docker stop stable
           # docker container inspect quay.io/rh_ee_keli/ucsls:stable-base-ope-latest
-          
-
-
 
           #TIME=$( docker history --format "{{.CreatedAt}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest | tail -1 | xargs -I % sh -c 'echo $(( $(date -u -d % +%s) - $(date -u -d "$(docker history --format "{{.CreatedAt}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest | head -2 | tail -1)" +%s) )) seconds' )
                 
