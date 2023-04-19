@@ -24,8 +24,12 @@ jobs:
           docker images quay.io/rh_ee_keli/ucsls
 
           docker ps -a 
-         
           
+          docker run quay.io/rh_ee_keli/ucsls:stable-base-ope-latest
+          docker ps -a
+
+          IMAGE_ID=$(docker images --filter=reference=quay.io/rh_ee_keli/ucsls --format "{{.ID}}")
+          echo $IMAGE_ID
           # docker container inspect quay.io/rh_ee_keli/ucsls:stable-base-ope-latest
 
           #START=$(docker inspect --format='{{.State.StartedAt}}' stable-base-ope-latest)
