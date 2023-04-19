@@ -37,17 +37,16 @@ jobs:
 
           #TIME=$( docker history --format "{{.CreatedAt}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest | tail -1 | xargs -I % sh -c 'echo $(( $(date -u -d % +%s) - $(date -u -d "$(docker history --format "{{.CreatedAt}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest | head -2 | tail -1)" +%s) )) seconds' )
                 
-          echo "time = $TIME"
-          START=$(docker inspect --format "{{.State.StartedAt}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest)
-          STOP=$(docker inspect --format "{{.State.FinishedAt}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest) 
-          echo $START
-          echo $STOP
-          START_TIMESTAMP=$(date --date=$START +%s)
-          STOP_TIMESTAMP=$(date --date=$STOP +%s)
-          echo $START_TIMESTAMP
-          echo $STOP_TIMESTAMP
-          echo $(($STOP_TIMESTAMP-$START_TIMESTAMP)) seconds
-
+          #echo "time = $TIME"
+          #START=$(docker inspect --format "{{.State.StartedAt}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest)
+          #STOP=$(docker inspect --format "{{.State.FinishedAt}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest) 
+          #echo $START
+          #echo $STOP
+          #START_TIMESTAMP=$(date --date=$START +%s)
+          #STOP_TIMESTAMP=$(date --date=$STOP +%s)
+          #echo $START_TIMESTAMP
+          #echo $STOP_TIMESTAMP
+          #echo $(($STOP_TIMESTAMP-$START_TIMESTAMP)) seconds
           docker stop stable
 
           TIME=$( cat build.txt ) 
