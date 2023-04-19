@@ -29,45 +29,22 @@ jobs:
           echo "listing again"
           docker ps -a
 
-          IMAGE_ID=$(docker images --filter=reference=stable --format "{{.ID}}")
+          IMAGE_ID=$( docker images --format "{{.ID}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest )
           echo "image id =  $IMAGE_ID"
-
-          ID=$( docker images -q )
-          echo "id = $ID"
-          SIZE= $(docker images --format="{{.Size}}" stable)
-          
-          echo "size = $SIZE"
-
-          SZ=$( docker images --format "{{.Repository}} {{.Size}}" stable )
-         
-          SZE=$( docker images --format "{{.Repository}} {{.Size}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest )
-
-          echo "SZ = $SZ" 
-
+          SZE=$( docker images --format "{{.Size}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest )
           echo "SZE = $SZE"
-          S=$( docker inspect --type=image --format='{{.Size}}' quay.io/rh_ee_keli/ucsls:stable-base-ope-latest)
-          echo "s = $S"
-          echo "Size: $(echo "scale=2; $S / 1024 / 1024 / 1024" | bc) GB"      
-          
-
-          GB=$((S / 1024 / 1024 / 1024))
-          MB=$((S / 1024 / 1024 % 1024))
-          KB=$((S / 1024 % 1024))
-          B=$((S % 1024))
-          echo "Size: $GB GB $MB MB $KB KB $B bytes"
-          
           #docker stop stable
           # docker container inspect quay.io/rh_ee_keli/ucsls:stable-base-ope-latest
           
 
 
 
-          TIME=$( docker history --format "{{.CreatedAt}}" stable | tail -1 | xargs -I % sh -c 'echo $(( $(date -u -d % +%s) - $(date -u -d "$(docker history --format "{{.CreatedAt}}" stable | head -2 | tail -1)" +%s) )) seconds' )
+        TIME=$( docker history --format "{{.CreatedAt}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest | tail -1 | xargs -I % sh -c 'echo $(( $(date -u -d % +%s) - $(date -u -d "$(docker history --format "{{.CreatedAt}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest | head -2 | tail -1)" +%s) )) seconds' )
                 
 
           echo "time = $TIME"
-          START=$(docker inspect --format='{{.State.StartedAt}}' stable)
-          STOP=$(docker inspect --format='{{.State.FinishedAt}}' stable) 
+          START=$(docker inspect --format "{{.State.StartedAt}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest)
+          STOP=$(docker inspect --format "{{.State.FinishedAt}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest) 
           echo $START
           echo $STOP
           START_TIMESTAMP=$(date --date=$START +%s)

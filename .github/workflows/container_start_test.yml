@@ -33,10 +33,10 @@ jobs:
           docker ps -a
                 
 
-          STATE=$ ( docker inspect --format='{{.State.Status}}' stable )
+          STATE=$( docker inspect --format='{{.State.Status}}' stable )
           echo "state = $STATE"
 
-          STATE2=$ ( docker inspect --format='{{.State.Status}}' quay.io/rh_ee_keli/ucsls:stable-base-ope-latest )
+          STATE2=$( docker inspect --format='{{.State.Status}}' quay.io/rh_ee_keli/ucsls:stable-base-ope-latest )
           echo "state2 = $STATE2"
           #docker ps | grep *stable-base-ope-latest*
 
