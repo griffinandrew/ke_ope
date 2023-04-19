@@ -3,7 +3,7 @@ on:
   push:
     branches: base-ope-image
 jobs:
-  checksum:
+  time + size:
     runs-on: ubuntu-latest #use the latest ubuntu container image 
     steps:
       - uses: actions/checkout@v3
@@ -24,14 +24,18 @@ jobs:
           docker images quay.io/rh_ee_keli/ucsls
 
           docker ps -a 
-          
+          echo "running image here"
           docker run -d --name stable quay.io/rh_ee_keli/ucsls:stable-base-ope-latest 
+          echo "listing again"
           docker ps -a
 
           IMAGE_ID=$(docker images --filter=reference=stable --format "{{.ID}}")
-          echo $IMAGE_ID
+          echo "image id =  $IMAGE_ID"
 
-          ID=$( docker images -q 
+          ID=$( docker images -q )
+          echo "id = $ID"
+
+          docker stop stable
           # docker container inspect quay.io/rh_ee_keli/ucsls:stable-base-ope-latest
 
           #START=$(docker inspect --format='{{.State.StartedAt}}' stable-base-ope-latest)
