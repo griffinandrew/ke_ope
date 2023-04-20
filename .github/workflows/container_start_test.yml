@@ -31,13 +31,15 @@ jobs:
           echo "listing again"
           
           docker ps -a
-                
+           
+
+          docker container inspect --format='{{json .State}}' quay.io/rh_ee_keli/ucsls:stable-base-ope-latest     
 
           #STATE=$( docker inspect --format='{{.Status}}' stable )
           #echo "state = $STATE"
 
-          STATE2=$( docker inspect --format='{{.Status}}' quay.io/rh_ee_keli/ucsls:stable-base-ope-latest )
-          echo "state2 = $STATE2"
+          # STATE2=$( docker inspect --format='{{.Status}}' quay.io/rh_ee_keli/ucsls:stable-base-ope-latest )
+          #echo "state2 = $STATE2"
           #docker ps | grep *stable-base-ope-latest*
 
           #IMAGE_ID=$(docker images --filter=reference=stable --format "{{.ID}}")

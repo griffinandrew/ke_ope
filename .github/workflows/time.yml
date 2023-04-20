@@ -18,15 +18,16 @@ jobs:
       - name: time make build # makes the container image build and then creates var with checksum value to be compared 
         run: |
           output=$(time make build 2>&1)
+          echo "output = $output"
           BUILD_TIME=$(echo "$output" | grep "real" | awk '{print $2}')
           echo "Build time: $BUILD_TIME seconds"
 
-          output2=$(time make build 2>&1)
-          BUILD_TIME2=$(echo "$output2" | grep -oP 'real.*?\K[\d.]+')
+          #output2=$(time make build 2>&1)
+          BUILD_TIME2=$(echo "$output" | grep -oP 'real.*?\K[\d.]+')
           echo "Build time: $BUILD_TIME2 seconds"
           
-          output3=$(time make build 2>&1)
-          BUILD_TIME3=$(echo "$output3" | grep "real" | awk '{print $2}')
+          #output3=$(time make build 2>&1)
+          BUILD_TIME3=$(echo "$output" | grep "real" | awk '{print $2}')
           echo "Build time: $BUILD_TIME3 seconds"
         shell: bash
 
