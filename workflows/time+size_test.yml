@@ -18,11 +18,16 @@ jobs:
       - name: time make build # makes the container image build and then creates var with checksum value to be compared 
         run: |
           # Run the "time make build" command and capture the output
-
-          date +"%Y-%m-%d %H:%M:%S" >> ./date.txt
+          #date +"%Y-%m-%d %H:%M:%S" >> ./date.txt
+          D=$( date +"%Y-%m-%d %H:%M:%S )
           output=$(time make build)
-          date +"%Y-%m-%d %H:%M:%S" >> ./date.txt
-          echo $output
+          D2=$( date +"%Y-%m-%d %H:%M:%S )
+          echo " d=$D , d2=$D2 "
+          
+          #date +"%Y-%m-%d %H:%M:%S" >> ./date.txt
+          #echo $output
+          
+          
           # # Extract the elapsed time value from the output
           BUILD_TIME=$(echo "$output" | grep "real" | awk '{print $2}')
           # # Print the elapsed time value
