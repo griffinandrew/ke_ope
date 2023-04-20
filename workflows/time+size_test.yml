@@ -27,10 +27,15 @@ jobs:
           # # Print the elapsed time value
           echo "Build time: $BUILD_TIME seconds"
 
-          echo "::set-output name=build_time::$BUILD_TIME"
-          echo "Build time: ${{ steps.build.outputs.build_time }} seconds"
           
-      - name: get the size #creates var with checksum value to be compared 
+          #run the "time make build" command and capture the output
+          output2=$( { time make build; } 2>&1 )
+
+          # Extract the elapsed time value from the output
+          BUILD_TIME2=$(echo "$output" | grep -oP 'real.*?\K[\d.]+')
+
+          # # Print the elapsed time value
+          echo "Build time: $BUILD_TIME2 seconds"
         run: |
           #docker image ls
           #docker images quay.io/rh_ee_keli/ucsls
