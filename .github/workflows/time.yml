@@ -18,7 +18,7 @@ jobs:
       - name: time make build # makes the container image build and then creates var with checksum value to be compared 
         run: |
           output=$(time make build 2>&1)
-          echo "output = $output"
+          #echo "output = $output"
           BUILD_TIME=$(echo "$output" | grep "real" | awk '{print $2}')
           echo "Build time: $BUILD_TIME seconds"
 
@@ -29,7 +29,7 @@ jobs:
           #output3=$(time make build 2>&1)
           #BUILD_TIME3=$(echo "$output" | grep "real" | awk '{print $2}')
           #echo "Build time: $BUILD_TIME3 seconds"
-        shell: bash
+          #shell: bash
 
       - name: get size
         run: |
@@ -43,4 +43,4 @@ jobs:
           SZE=$(docker images --format "{{.Size}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest)
           echo "SZE = $SZE"
           docker stop stable
-        shell: bash
+          #shell: bash

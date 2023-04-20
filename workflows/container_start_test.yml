@@ -32,8 +32,7 @@ jobs:
           
           docker ps -a
            
-          IMAGE_ID=$( docker images --format "{{.ID}}" quay.io/rh_ee_keli/ucsls:stable-base-
-        ope-latest )
+          IMAGE_ID=$( docker images --format "{{.ID}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest )
           docker container inspect --format='{{json .State}}' $IMAGE_ID    
 
           #STATE=$( docker inspect --format='{{.Status}}' stable )
