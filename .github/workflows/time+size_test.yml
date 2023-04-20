@@ -26,7 +26,10 @@ jobs:
           #
           # # Print the elapsed time value
           echo "Build time: $BUILD_TIME seconds"
-          echo "output : $output"
+
+          echo "::set-output name=build_time::$BUILD_TIME"
+          echo "Build time: ${{ steps.build.outputs.build_time }} seconds"
+          
       - name: get the size #creates var with checksum value to be compared 
         run: |
           #docker image ls
