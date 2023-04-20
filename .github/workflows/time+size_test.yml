@@ -18,7 +18,8 @@ jobs:
       - name: time make build # makes the container image build and then creates var with checksum value to be compared 
         run: |
           # Run the "time make build" command and capture the output
-          output=$(time make build)
+          output=$(time make build 2&>1 > build.txt)
+          echo ./build.txt
           echo $output
           
           # # Extract the elapsed time value from the output
