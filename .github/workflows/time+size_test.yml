@@ -26,16 +26,18 @@ jobs:
           #
           # # Print the elapsed time value
           echo "Build time: $BUILD_TIME seconds"
-
+        
+          time=$( cat time.txt )
+          echo $time
           
           #run the "time make build" command and capture the output
           #output2=$(  time make build;  2>&1 )
 
           # Extract the elapsed time value from the output
-          BUILD_TIME2=$(echo "$output" | grep -oP 'real.*?\K[\d.]+')
+          #BUILD_TIME2=$(echo "$output" | grep -oP 'real.*?\K[\d.]+')
 
           # # Print the elapsed time value
-          echo "Build time: $BUILD_TIME2 seconds"
+          #echo "Build time: $BUILD_TIME2 seconds"
           #output2=$(time make build 2>&1)
           #BUILD_TIME3=$(echo "$output2" | grep "real" | awk '{print $2}')
           #echo "Build time $BUILD_TIME3 seconds"

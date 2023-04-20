@@ -155,7 +155,9 @@ build: ## Make the image customized appropriately
 	docker create --name tmp $(PRIVATE_REG)$(IMAGE)$(PRIVATE_TAG)
 	docker cp tmp:/home/jovyan/permissions_checksum.txt ./permissions_checksum.txt
 	docker rm tmp
-
+	docker create --name tmp $(PRIVATE_REG)$(IMAGE)$(PRIVATE_TAG)
+	docker cp tmp:/home/jovyan/time.txt ./time.txt
+	docker rm tmp 
 push: IMAGE = $(PRIVATE_IMAGE)
 push: DARGS ?=
 push: ## push private build
