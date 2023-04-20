@@ -17,29 +17,16 @@ jobs:
           pip install jupyter-book matplotlib numpy pandas
       - name: time make build # makes the container image build and then creates var with checksum value to be compared 
         run: |
-          #time make build
           # Run the "time make build" command and capture the output
           output=$(time make build)
           echo $output
-
           
           # # Extract the elapsed time value from the output
           BUILD_TIME=$(echo "$output" | grep "real" | awk '{print $2}')
           #
           # # Print the elapsed time value
           echo "Build time: $BUILD_TIME seconds"
-        
-          #time=$( cat time.txt )
-          #echo $time
           
-          #run the "time make build" command and capture the output
-          #output2=$(  time make build;  2>&1 )
-
-          # Extract the elapsed time value from the output
-          #BUILD_TIME2=$(echo "$output" | grep -oP 'real.*?\K[\d.]+')
-
-          # # Print the elapsed time value
-          #echo "Build time: $BUILD_TIME2 seconds"
           #output2=$(time make build 2>&1)
           #BUILD_TIME3=$(echo "$output2" | grep "real" | awk '{print $2}')
           #echo "Build time $BUILD_TIME3 seconds"
@@ -53,33 +40,16 @@ jobs:
           docker run -d --name stable quay.io/rh_ee_keli/ucsls:stable-base-ope-latest 
           echo "LIST RUNNING CONTAINERS"
           docker ps -a
-
           IMAGE_ID=$( docker images --format "{{.ID}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest )
           echo "image id =  $IMAGE_ID"
           SZE=$( docker images --format "{{.Size}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest )
           echo "SZE = $SZE"
-          #docker stop stable
-          # docker container inspect quay.io/rh_ee_keli/ucsls:stable-base-ope-latest
+
+          SZ=$( docker images --format "{{.Size}}" $IMAGE_ID)
+
+          echo "SZ= $SZ"
 
           #TIME=$( docker history --format "{{.CreatedAt}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest | tail -1 | xargs -I % sh -c 'echo $(( $(date -u -d % +%s) - $(date -u -d "$(docker history --format "{{.CreatedAt}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest | head -2 | tail -1)" +%s) )) seconds' )
                 
-          #echo "time = $TIME"
-          #START=$(docker inspect --format "{{.State.StartedAt}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest)
-          #STOP=$(docker inspect --format "{{.State.FinishedAt}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest) 
-          #echo $START
-          #echo $STOP
-          #START_TIMESTAMP=$(date --date=$START +%s)
-          #STOP_TIMESTAMP=$(date --date=$STOP +%s)
-          #echo $START_TIMESTAMP
-          #echo $STOP_TIMESTAMP
-          #echo $(($STOP_TIMESTAMP-$START_TIMESTAMP)) seconds
           docker stop stable
                 
-          #cat ./build.txt
-
-
-          #TIME=$( cat build.txt ) 
-
-          #T=$(echo $TIME | grep "real* ")
-
-          #echo $T

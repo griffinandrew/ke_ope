@@ -33,22 +33,6 @@ jobs:
           docker ps -a
            
           IMAGE_ID=$( docker images --format "{{.ID}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest )
-          docker container inspect --format='{{json .State}}' $IMAGE_ID    
-
-          #STATE=$( docker inspect --format='{{.Status}}' stable )
-          #echo "state = $STATE"
-
-          # STATE2=$( docker inspect --format='{{.Status}}' quay.io/rh_ee_keli/ucsls:stable-base-ope-latest )
-          #echo "state2 = $STATE2"
-          #docker ps | grep *stable-base-ope-latest*
-
-          #IMAGE_ID=$(docker images --filter=reference=stable --format "{{.ID}}")
-          #echo "image id =  $IMAGE_ID"
-
-          #ID=$( docker images -q )
-          #echo "id = $ID"
-          #SIZE= $(docker images --format="{{.Size}}" stable)
-          
-          #echo "size = $SIZE"
+        docker container inspect --format='{{json .State}}' quay.io/rh_ee_keli/ucsls:stable-base-ope-latest
 
           docker stop stable
