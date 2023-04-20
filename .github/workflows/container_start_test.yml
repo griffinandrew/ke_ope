@@ -1,0 +1,54 @@
+name: container_start_test
+on:
+  push:
+    branches: base-ope-image
+jobs:
+  container_start:
+    runs-on: ubuntu-latest #use the latest ubuntu container image 
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4 #use action to install python
+        with:
+          python-version: "3.9"
+      - name: Install dependencies #requirements docs unable to read, hard installing dependencies 
+        run: |
+          #pip install -r requirements.txt    
+          pip install jupyter-book matplotlib numpy pandas
+      - name: time make build # makes the container image build and then creates var with checksum value to be compared 
+        run: |
+          make build
+      - name: get the size #creates var with checksum value to be compared 
+        run: |
+          #docker image ls
+          #docker images quay.io/rh_ee_keli/ucsls
+
+          #docker ps -a 
+          echo "running image here"
+          docker run -d --name stable quay.io/rh_ee_keli/ucsls:stable-base-ope-latest 
+          sleep 10 #sleep for 7s to see if image starts properly
+          
+          echo "listing again"
+          
+          docker ps -a
+           
+          #IMAGE_ID=$( docker images --format "{{.ID}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest )
+          health_json=$( docker container inspect --format='{{json .State}}' stable )
+
+          echo $health_json | grep ":{\"Status\":\"healthy\"*"
+
+
+          
+
+          ID=$( docker ps -aqf "name=stable" ) 
+          echo $ID
+        
+          CONTAINER_NAME="stable"
+          HEALTH=$(docker ps --format "{{.Names}}: {{.Status}}" | grep "$CONTAINER_NAME" | awk '{print $2}')
+          echo $HEALTH 
+          if [[ "$HEALTH" == "up" ]]; then
+                echo "Container is up and running"
+          else
+          echo "Container is not running"
+          fi
+          docker stop stable
