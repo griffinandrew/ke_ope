@@ -1,0 +1,45 @@
+name: time
+on:
+  push:
+    branches: base-ope-image
+jobs:
+  time:
+    runs-on: ubuntu-latest #use the latest ubuntu container image 
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4 #use action to install python
+        with:
+          python-version: "3.9"
+      - name: Install dependencies #requirements docs unable to read, hard installing dependencies 
+        run: |
+          #pip install -r requirements.txt    
+          pip install jupyter-book matplotlib numpy pandas
+      - name: time make build # makes the container image build and then creates var with checksum value to be compared 
+        run: |
+          output=$(time make build 2>&1)
+          BUILD_TIME=$(echo "$output" | grep "real" | awk '{print $2}')
+          echo "Build time: $BUILD_TIME seconds"
+
+          output2=$(time make build 2>&1)
+          BUILD_TIME2=$(echo "$output2" | grep -oP 'real.*?\K[\d.]+')
+          echo "Build time: $BUILD_TIME2 seconds"
+          
+          output3=$(time make build 2>&1)
+          BUILD_TIME3=$(echo "$output3" | grep "real" | awk '{print $2}')
+          echo "Build time: $BUILD_TIME3 seconds"
+        shell: bash
+
+      - name: get size
+        run: |
+          echo "RUN CONTAINER"
+          docker run -d --name stable quay.io/rh_ee_keli/ucsls:stable-base-ope-latest 
+          echo "LIST RUNNING CONTAINERS"
+          docker ps -a
+
+          IMAGE_ID=$(docker images --format "{{.ID}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest)
+          echo "image id =  $IMAGE_ID"
+          SZE=$(docker images --format "{{.Size}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest)
+          echo "SZE = $SZE"
+          docker stop stable
+        shell: bash
