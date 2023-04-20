@@ -15,14 +15,17 @@ jobs:
         run: |
           #pip install -r requirements.txt    
           pip install jupyter-book matplotlib numpy pandas
-      - name: time make build # makes the container image build and then creates var with checksum value to be compared 
+      - name: make build and calculate elapsed time # makes the container image build and then creates var with checksum value to be compared 
         run: |
           # Run the "time make build" command and capture the output
           #date +"%Y-%m-%d %H:%M:%S" >> ./date.txt
-          D=$( date +"%Y-%m-%d %H:%M:%S" )
-          output=$(time make build)
-          D2=$( date +"%Y-%m-%d %H:%M:%S" )
-          echo " d=$D , d2=$D2 "
+          #D=$( date +"%H:%M:%S" )
+          start=$(date +%s)
+          time make build
+          #D2=$( date +"%H:%M:%S" )
+          end=$(date +%s)
+          echo "Elapsed time: $((end-start)) seconds"
+          echo " end= $end  start= $start"
           
           #date +"%Y-%m-%d %H:%M:%S" >> ./date.txt
           #echo $output
@@ -33,11 +36,8 @@ jobs:
           # # Print the elapsed time value
           echo "Build time: $BUILD_TIME seconds"
 
-      - name: get size
+      - name: extract size
         run: |
-          #docker image ls
-          #docker images quay.io/rh_ee_keli/ucsls
-          #docker ps -a 
           echo "RUN CONTAINER"
           docker run -d --name stable quay.io/rh_ee_keli/ucsls:stable-base-ope-latest 
           echo "LIST RUNNING CONTAINERS"

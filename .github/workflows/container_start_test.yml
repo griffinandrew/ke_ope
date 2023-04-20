@@ -20,33 +20,14 @@ jobs:
           make build
       - name: get the size #creates var with checksum value to be compared 
         run: |
-          #docker image ls
-          #docker images quay.io/rh_ee_keli/ucsls
-
-          #docker ps -a 
           echo "running image here"
           docker run -d --name stable quay.io/rh_ee_keli/ucsls:stable-base-ope-latest 
-          sleep 10 #sleep for 7s to see if image starts properly
-          
-          echo "listing again"
-          
-          docker ps -a
-           
-          #IMAGE_ID=$( docker images --format "{{.ID}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest )
-          health_json=$( docker container inspect --format='{{json .State}}' stable )
-
-          echo $health_json | grep ":{\"Status\":\"healthy\"*"
-
-
-          
-
-          ID=$( docker ps -aqf "name=stable" ) 
-          echo $ID
-        
+          sleep 12 #sleep for 7s to see if image starts properly
+          echo "relisting, should be up"
           CONTAINER_NAME="stable"
           HEALTH=$(docker ps --format "{{.Names}}: {{.Status}}" | grep "$CONTAINER_NAME" | awk '{print $2}')
-          echo $HEALTH 
-          if [[ "$HEALTH" == "up" ]]; then
+          docker ps -a
+          if [[ "$HEALTH" == "Up" ]]; then
                 echo "Container is up and running"
           else
           echo "Container is not running"
