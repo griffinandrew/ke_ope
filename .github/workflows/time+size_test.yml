@@ -19,7 +19,9 @@ jobs:
         run: |
           #time make build
           # Run the "time make build" command and capture the output
-          output=$({time make build})
+          output=$(time make build)
+          echo $output
+
           
           # # Extract the elapsed time value from the output
           BUILD_TIME=$(echo "$output" | grep "real" | awk '{print $2}')
