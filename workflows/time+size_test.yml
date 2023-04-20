@@ -19,9 +19,9 @@ jobs:
         run: |
           # Run the "time make build" command and capture the output
           #date +"%Y-%m-%d %H:%M:%S" >> ./date.txt
-          D=$( date +"%Y-%m-%d %H:%M:%S )
+          D=$( date +"%Y-%m-%d %H:%M:%S" )
           output=$(time make build)
-          D2=$( date +"%Y-%m-%d %H:%M:%S )
+          D2=$( date +"%Y-%m-%d %H:%M:%S" )
           echo " d=$D , d2=$D2 "
           
           #date +"%Y-%m-%d %H:%M:%S" >> ./date.txt
