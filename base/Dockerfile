@@ -1,7 +1,6 @@
 ## Dockerfile for constructing the base Open Education Effort (OPE)
 ## container.  This container contains everything required for authoring OPE courses
 ## Well is should anyway ;-)
-RUN echo "start : $(date)" >> /home/jovyan/time.txt
 
 ARG FROM_REG
 ARG FROM_IMAGE
@@ -115,6 +114,5 @@ RUN chgrp root -R /home
 RUN find / -path /proc -prune -o -type f 2>/dev/null -exec stat -c '%n %a' {} + | sha256sum > /home/jovyan/permissions_checksum.txt
 
 USER $NB_USER
-CMD  ["/bin/bash", "-c", "cd /home/jovyan ; start-notebook.sh"]i
+CMD  ["/bin/bash", "-c", "cd /home/jovyan ; start-notebook.sh"]
 
-RUN echo "end=$(date)" >> /home/jovyan/time.txt

@@ -19,16 +19,16 @@ jobs:
         run: |
           #time make build
           # Run the "time make build" command and capture the output
-          output=$(time make build 2>&1)
-          #
+          output=$({time make build})
+          
           # # Extract the elapsed time value from the output
           BUILD_TIME=$(echo "$output" | grep "real" | awk '{print $2}')
           #
           # # Print the elapsed time value
           echo "Build time: $BUILD_TIME seconds"
         
-          time=$( cat time.txt )
-          echo $time
+          #time=$( cat time.txt )
+          #echo $time
           
           #run the "time make build" command and capture the output
           #output2=$(  time make build;  2>&1 )
