@@ -36,6 +36,7 @@ jobs:
 
           # # Print the elapsed time value
           echo "Build time: $BUILD_TIME2 seconds"
+      - name: get size
         run: |
           #docker image ls
           #docker images quay.io/rh_ee_keli/ucsls
