@@ -26,15 +26,15 @@ jobs:
           #docker ps -a 
           echo "running image here"
           docker run -d --name stable quay.io/rh_ee_keli/ucsls:stable-base-ope-latest 
-          sleep 7 #sleep for 7s to see if image starts properly
+          sleep 10 #sleep for 7s to see if image starts properly
           
           echo "listing again"
           
           docker ps -a
                 
 
-          STATE=$( docker inspect --format='{{.Status}}' stable )
-          echo "state = $STATE"
+          #STATE=$( docker inspect --format='{{.Status}}' stable )
+          #echo "state = $STATE"
 
           STATE2=$( docker inspect --format='{{.Status}}' quay.io/rh_ee_keli/ucsls:stable-base-ope-latest )
           echo "state2 = $STATE2"
