@@ -21,16 +21,10 @@ jobs:
           output=$(time make build 2> build.txt)
           cat ./build.txt
           echo $output
-          
           # # Extract the elapsed time value from the output
           BUILD_TIME=$(echo "$output" | grep "real" | awk '{print $2}')
-          #
           # # Print the elapsed time value
           echo "Build time: $BUILD_TIME seconds"
-          
-          #output2=$(time make build 2>&1)
-          #BUILD_TIME3=$(echo "$output2" | grep "real" | awk '{print $2}')
-          #echo "Build time $BUILD_TIME3 seconds"
 
       - name: get size
         run: |
