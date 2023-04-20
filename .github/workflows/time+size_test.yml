@@ -17,41 +17,24 @@ jobs:
           pip install jupyter-book matplotlib numpy pandas
       - name: make build and calculate elapsed time # makes the container image build and then creates var with checksum value to be compared 
         run: |
-          # Run the "time make build" command and capture the output
-          #date +"%Y-%m-%d %H:%M:%S" >> ./date.txt
-          #D=$( date +"%H:%M:%S" )
           start=$(date +%s)
           time make build
-          #D2=$( date +"%H:%M:%S" )
           end=$(date +%s)
-          echo "Elapsed time: $((end-start)) seconds"
-          echo " end= $end  start= $start"
-          
-          #date +"%Y-%m-%d %H:%M:%S" >> ./date.txt
-          #echo $output
-          
-          
-          # # Extract the elapsed time value from the output
-          BUILD_TIME=$(echo "$output" | grep "real" | awk '{print $2}')
-          # # Print the elapsed time value
-          echo "Build time: $BUILD_TIME seconds"
-
+          echo "end= $end  start= $start"
+          elapsed=$((end-start))
+          min=$elapsed/60
+          min_cut=${elapsed::1} #this assumes single digits thoooo
+          sec_cut =${elapsed::1} 
       - name: extract size
         run: |
-          echo "RUN CONTAINER"
           docker run -d --name stable quay.io/rh_ee_keli/ucsls:stable-base-ope-latest 
-          echo "LIST RUNNING CONTAINERS"
           docker ps -a
-          IMAGE_ID=$( docker images --format "{{.ID}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest )
-          echo "image id =  $IMAGE_ID"
-          SZE=$( docker images --format "{{.Size}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest )
-          echo "SZE = $SZE"
-
-          SZ=$( docker inspect --size stable)
-
-          echo "SZ= $SZ"
-
-          #TIME=$( docker history --format "{{.CreatedAt}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest | tail -1 | xargs -I % sh -c 'echo $(( $(date -u -d % +%s) - $(date -u -d "$(docker history --format "{{.CreatedAt}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest | head -2 | tail -1)" +%s) )) seconds' )
-                
+          #IMAGE_ID=$( docker images --format "{{.ID}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest )
+          SIZE=$( docker images --format "{{.Size}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest )
+          echo "" 
+          echo "BUILD TIME:  $elapsed seconds"
+          
+          echo "IMAGE SIZE:  $SIZE"
+          echo ""
           docker stop stable
                 

@@ -15,21 +15,20 @@ jobs:
         run: |
           #pip install -r requirements.txt    
           pip install jupyter-book matplotlib numpy pandas
-      - name: time make build # makes the container image build and then creates var with checksum value to be compared 
+      - name: make build # makes the container image build 
         run: |
           make build
-      - name: get the size #creates var with checksum value to be compared 
+      - name: check health #runs image and checks if it is up running after 12 seconds 
         run: |
-          echo "running image here"
           docker run -d --name stable quay.io/rh_ee_keli/ucsls:stable-base-ope-latest 
           sleep 12 #sleep for 7s to see if image starts properly
-          echo "relisting, should be up"
           CONTAINER_NAME="stable"
           HEALTH=$(docker ps --format "{{.Names}}: {{.Status}}" | grep "$CONTAINER_NAME" | awk '{print $2}')
           docker ps -a
+          echo ""
           if [[ "$HEALTH" == "Up" ]]; then
-                echo "Container is up and running"
+          echo "HEALTHY : container is up and running"
           else
-          echo "Container is not running"
+          echo "ERROR : container is not running"
           fi
           docker stop stable
