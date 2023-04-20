@@ -35,7 +35,8 @@ jobs:
           #IMAGE_ID=$( docker images --format "{{.ID}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest )
           health_json=$( docker container inspect --format='{{json .State}}' stable )
 
-          echo $health_json | grep ':{"Status":"healthy"' 
+          echo $health_json | grep ":{\"Status\":\"healthy\""
+          
 
           ID=$( docker ps -aqf "name=stable" ) 
           echo $ID
