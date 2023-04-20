@@ -23,12 +23,12 @@ jobs:
           echo "Build time: $BUILD_TIME seconds"
 
           #output2=$(time make build 2>&1)
-          BUILD_TIME2=$(echo "$output" | grep -oP 'real.*?\K[\d.]+')
-          echo "Build time: $BUILD_TIME2 seconds"
+          #BUILD_TIME2=$(echo "$output" | grep -oP 'real.*?\K[\d.]+')
+          #echo "Build time: $BUILD_TIME2 seconds"
           
           #output3=$(time make build 2>&1)
-          BUILD_TIME3=$(echo "$output" | grep "real" | awk '{print $2}')
-          echo "Build time: $BUILD_TIME3 seconds"
+          #BUILD_TIME3=$(echo "$output" | grep "real" | awk '{print $2}')
+          #echo "Build time: $BUILD_TIME3 seconds"
         shell: bash
 
       - name: get size
