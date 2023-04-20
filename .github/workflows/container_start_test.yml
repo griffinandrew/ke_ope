@@ -37,5 +37,12 @@ jobs:
 
           ID=$( docker ps -aqf "name=stable" ) 
           echo $ID
-
+        
+          CONTAINER_NAME="stable"
+          HEALTH=$(docker ps --format "{{.Names}}: {{.Status}}" | grep "$CONTAINER_NAME" | awk '{print $2}')
+          if [[ "$HEALTH" == "healthy" ]]; then
+                echo "Container is healthy"
+          else
+          echo "Container is not healthy"
+          fi
           docker stop stable
