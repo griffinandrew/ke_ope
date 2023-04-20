@@ -33,6 +33,6 @@ jobs:
           docker ps -a
            
           IMAGE_ID=$( docker images --format "{{.ID}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest )
-        docker container inspect --format='{{json .State}}' quay.io/rh_ee_keli/ucsls:stable-base-ope-latest
+          docker container inspect --format='{{json .State}}' quay.io/rh_ee_keli/ucsls:stable-base-ope-latest
 
           docker stop stable
