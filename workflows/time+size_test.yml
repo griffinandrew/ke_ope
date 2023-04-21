@@ -18,23 +18,21 @@ jobs:
       - name: make build and calculate elapsed time # makes the container image build and then creates var with checksum value to be compared 
         run: |
           start=$(date +%s)
-          time make build
+          time make build -q
           end=$(date +%s)
-          echo "end= $end  start= $start"
           elapsed=$((end-start))
-          min=$elapsed/60
-          min_cut=${elapsed%.*} #this assumes single digits thoooo
+          sec_2_min=$elapsed/60
+          min=${elapsed%.*} #this assumes single digits thoooo
           sec_cut=${elapsed#*.}
           sec=$((sec_cut * 60))
 
-      - name: extract size
-        run: |
+          #- name: extract size
+          #run: |
           docker run -d --name stable quay.io/rh_ee_keli/ucsls:stable-base-ope-latest 
           docker ps -a
-          #IMAGE_ID=$( docker images --format "{{.ID}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest )
           SIZE=$( docker images --format "{{.Size}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest )
-          echo "" 
-          echo "BUILD TIME:  $min MIN $sec SECS  $elapsed seconds"
+          echo ""
+          echo "BUILD TIME:  $min MIN $sec SECS  or  $elapsed seconds"
           echo "" 
           echo "IMAGE SIZE:  $SIZE"
           echo ""
