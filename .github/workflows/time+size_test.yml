@@ -27,7 +27,7 @@ jobs:
           min=${elapsed%.*}
           echo "min = $min"
           sec_cut=${elapsed#*.}
-          sec_round=${sec_cut:0:1}
+          sec_round="${sec_cut:0:1}.{sec_cut:1}"
           echo "sec cut = $sec_cut" 
           echo "sec round = $sec_round"
           sec=$( echo "$sec_round * 6" | bc -l)
