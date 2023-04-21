@@ -1,0 +1,27 @@
+name: base iamge and version test
+on:
+  push:
+    branches: base-ope-image
+jobs:
+  checksum:
+    runs-on: ubuntu-latest #use the latest ubuntu container image 
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4 #use action to install python
+        with:
+          python-version: "3.9"
+      - name: Install dependencies #requirements docs unable to read, hard installing dependencies 
+        run: |
+          #pip install -r requirements.txt    
+          pip install jupyter-book matplotlib numpy pandas jq
+      - name: make build # makes the container image build 
+        run: |
+          make build
+      - name: get base image and version
+        run: |
+          docker inspect myimage:latest > image.json
+          VERSION=$(jq -r '.[0].Config.Labels["version"]' image.json)
+          BASE_IMAGE=$(jq -r '.[0].Config.Image' image.json)
+          echo "Version: $VERSION"
+          echo "Base image: $BASE_IMAGE"
