@@ -27,8 +27,9 @@ jobs:
           min=${elapsed%.*}
           echo "min = $min"
           sec_cut=${elapsed#*.}
+          sec_round=${sec_cut:0:1}
           echo "sec cut = $sec_cut" 
-          sec=$( echo "$sec_cut * 60" | bc -l)
+          sec=$( echo "$sec_cut * 6" | bc -l)
 
           #- name: extract size
           #run: |

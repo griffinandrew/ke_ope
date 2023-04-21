@@ -32,3 +32,6 @@ jobs:
           BASE_IMAGE2=$(docker history --no-trunc quay.io/rh_ee_keli/ucsls:stable-base-ope-latest | grep -v '<missing>' | tail -1 | awk '{print $5}')
           echo "Version: $VERSION   $VERSION2"
           echo "Base image: $BASE_IMAGE    $BASE_IMAGE2"
+
+          REPO_TAG=$(jq -r '.[0].RepoTags[0]' image.json)
+          echo "RepoTag: $REPO_TAG"
