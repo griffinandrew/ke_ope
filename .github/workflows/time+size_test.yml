@@ -20,15 +20,15 @@ jobs:
           start=$(date +%s)
           time make build --silent
           end=$(date +%s)
-          #elapsed=$((end-start))
+          seconds=$((end-start))
           elapsed=$(echo "scale=2; ($end - $start) / 60.0" | bc)
-          sec_2_min=$(($elapsed/60.0))
-          echo "sec to min = $sec_2_min"
-          min=${sec_2_min%.*}
+          #sec_2_min=$(($elapsed/60.0))
+          #echo "sec to min = $sec_2_min"
+          min=${elapsed%.*}
           echo "min = $min"
-          sec_cut=${sec_2_min#*.}
+          sec_cut=${elapsed#*.}
           echo "sec cut = $sec_cut" 
-          sec=$((sec_cut * 60))
+          sec=$( echo "$sec_cut * 60" | bc -l)
 
           #- name: extract size
           #run: |
@@ -36,7 +36,7 @@ jobs:
           docker ps -a
           SIZE=$( docker images --format "{{.Size}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest )
           echo ""
-          echo "BUILD TIME:  $min MIN $sec SECS  or  $elapsed seconds"
+          echo "BUILD TIME:  $min MIN $sec SECS  or  $seconds seconds"
           echo "" 
           echo "IMAGE SIZE:  $SIZE"
           echo ""
