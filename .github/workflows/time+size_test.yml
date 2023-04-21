@@ -21,9 +21,11 @@ jobs:
           time make build --silent
           end=$(date +%s)
           elapsed=$((end-start))
-          sec_2_min=$elapsed/60
+          sec_2_min=$((elapsed/60))
+          echo "sec to min = $sec_2_min"
           min=${sec_2_min%.*} #this assumes single digits thoooo
           sec_cut=${sec_2_min#*.}
+          echo "sec cut = $sec_cut" 
           sec=$((sec_cut * 60))
 
           #- name: extract size
