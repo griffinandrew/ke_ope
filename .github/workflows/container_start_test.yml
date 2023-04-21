@@ -31,6 +31,7 @@ jobs:
           echo "HEALTHY : container is up and running"
           else
           echo "ERROR : container is not running"
+          exit -1
           fi
           echo ""
           docker stop stable
