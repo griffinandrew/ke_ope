@@ -37,10 +37,10 @@ jobs:
           REPO_TAG=$(jq -r '.[0].RepoTags[0]' image.json)
           echo "RepoTag: $REPO_TAG"
 
-          if [[$REPO_TAG == $IMAGE]]; then
+          if [["$REPO_TAG == $IMAGE"]]; then
                 echo "CORRECT IMAGE AND VERSION"
           else
-                echo "INCORRECT IMAGE AND VEFRSION"
+                echo "INCORRECT IMAGE or VERSION"
                 exit -1
           fi
 
