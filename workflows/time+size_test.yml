@@ -23,8 +23,10 @@ jobs:
           echo "end= $end  start= $start"
           elapsed=$((end-start))
           min=$elapsed/60
-          min_cut=${elapsed::1} #this assumes single digits thoooo
-          sec_cut =${elapsed::1} 
+          min_cut=${elapsed%.*} #this assumes single digits thoooo
+          sec_cut=${elapsed#*.}
+          sec=$((sec_cut * 60))
+
       - name: extract size
         run: |
           docker run -d --name stable quay.io/rh_ee_keli/ucsls:stable-base-ope-latest 
@@ -32,8 +34,8 @@ jobs:
           #IMAGE_ID=$( docker images --format "{{.ID}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest )
           SIZE=$( docker images --format "{{.Size}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest )
           echo "" 
-          echo "BUILD TIME:  $elapsed seconds"
-          
+          echo "BUILD TIME:  $min MIN $sec SECS  $elapsed seconds"
+          echo "" 
           echo "IMAGE SIZE:  $SIZE"
           echo ""
           docker stop stable
