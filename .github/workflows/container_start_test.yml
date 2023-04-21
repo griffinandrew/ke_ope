@@ -1,4 +1,4 @@
-name: container_start_test
+name: container start test
 on:
   push:
     branches: base-ope-image
@@ -32,4 +32,5 @@ jobs:
           else
           echo "ERROR : container is not running"
           fi
+          echo ""
           docker stop stable

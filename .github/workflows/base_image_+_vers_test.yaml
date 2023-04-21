@@ -23,19 +23,7 @@ jobs:
           IMAGE=quay.io/rh_ee_keli/ucsls:stable-base-ope-latest
           docker run -d --name stable $IMAGE 
           ID=$( docker ps -aqf "name=stable" )     
-          docker inspect $IMAGE > image.json
-          #cat image.json
-          #VERSION2=$(docker inspect --format={{index .Config.Labels "version"}} myimage:latest)
-          IMAGE_ID=$( docker images --format "{{.ID}}" $IMAGE )
-          docker container ls --all --filter=ancestor=$ID --format "{{.ID}}"
-          VERSION=$(jq -r '.[0].Config.Labels["version"]' image.json)
-          BASE_IMAGE=$(jq -r '.[0].Config.Image' image.json)
-          BASE_IMAGE2=$(docker history --no-trunc $IMAGE | grep -v '<missing>' | tail -1 | awk '{print $5}')
-          echo "Version: $VERSION   "
-          echo "Base image: $BASE_IMAGE    $BASE_IMAGE2"
-
           REPO_TAG=$(jq -r '.[0].RepoTags[0]' image.json)
-          echo "RepoTag: $REPO_TAG"
 
           if [[ "$REPO_TAG" == "$IMAGE" ]]; then
                 echo "CORRECT IMAGE AND VERSION"
