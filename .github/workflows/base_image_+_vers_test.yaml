@@ -1,9 +1,9 @@
-name: base iamge and version test
+name: base image and version test
 on:
   push:
     branches: base-ope-image
 jobs:
-  checksum:
+  image_version_check:
     runs-on: ubuntu-latest #use the latest ubuntu container image 
     steps:
       - uses: actions/checkout@v3
@@ -21,7 +21,10 @@ jobs:
       - name: get base image and version
         run: |
           docker inspect quay.io/rh_ee_keli/ucsls:stable-base-ope-latest > image.json
+          cat image.json
+          VERSION2=$(docker inspect --format={{index .Config.Labels "version"}} myimage:latest)
           VERSION=$(jq -r '.[0].Config.Labels["version"]' image.json)
           BASE_IMAGE=$(jq -r '.[0].Config.Image' image.json)
-          echo "Version: $VERSION"
-          echo "Base image: $BASE_IMAGE"
+          BASE_IMAGE2=$(docker history --no-trunc myimage:latest | grep -v '<missing>' | tail -1 | awk '{print $5}')
+          echo "Version: $VERSION   $VERSION2"
+          echo "Base image: $BASE_IMAGE    $BASE_IMAGE2"

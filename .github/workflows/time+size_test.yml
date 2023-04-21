@@ -20,7 +20,8 @@ jobs:
           start=$(date +%s)
           time make build --silent
           end=$(date +%s)
-          elapsed=$((end-start))
+          #elapsed=$((end-start))
+          elapsed=$(echo "scale=2; ($end - $start) / 60.0" | bc)
           sec_2_min=$(($elapsed/60.0))
           echo "sec to min = $sec_2_min"
           min=${sec_2_min%.*}
