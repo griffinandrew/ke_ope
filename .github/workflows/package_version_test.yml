@@ -39,7 +39,7 @@ jobs:
               asttokens==2.2.1)
                 echo "CORRECT version of package: $line"
                 ;;
-              attrs==22.2.0)
+              attrs==23.1.0)
                 echo "CORRECT version of package: $line"
                 ;;
               Babel==2.12.1)
@@ -96,7 +96,7 @@ jobs:
               imagesize==1.4.1)
                 echo "CORRECT version of package: $line"
                 ;;
-              importlib-metadata==6.3.0)
+              importlib-metadata==6.5.0)
                 echo "CORRECT version of package: $line"
                 ;;
               importlib-resources==5.12.0)
@@ -120,10 +120,10 @@ jobs:
               jupyter-book==0.15.1)
                 echo "CORRECT version of package: $line"
                 ;;
-              jupyter-cache==0.5.0)
+              jupyter-cache==0.6.0)
                 echo "CORRECT version of package: $line"
                 ;;
-              jupyter_client==8.1.0)
+              jupyter_client==8.2.0)
                 echo "CORRECT version of package: $line"
                 ;;
               jupyter_core==5.3.0)
@@ -159,13 +159,13 @@ jobs:
               mdurl==0.1.2)
                 echo "CORRECT version of package: $line"
                 ;;
-              myst-nb==0.17.1)
+              myst-nb==0.17.2)
                 echo "CORRECT version of package: $line"
                 ;;
               myst-parser==0.18.1)
                 echo "CORRECT version of package: $line"
                 ;;
-              nbclient==0.5.13)
+              nbclient==0.7.3)
                 echo "CORRECT version of package: $line"
                 ;;
               nbformat==5.8.0)
@@ -177,7 +177,7 @@ jobs:
               numpy==1.24.2)
                 echo "CORRECT version of package: $line"
                 ;;
-              packaging==23.0)
+              packaging==23.1)
                 echo "CORRECT version of package: $line"
                 ;;
               pandas==2.0.0)
@@ -201,7 +201,7 @@ jobs:
               prompt-toolkit==3.0.38)
                 echo "CORRECT version of package: $line"
                 ;;
-              psutil==5.9.4)
+              psutil==5.9.5)
                 echo "CORRECT version of package: $line"
                 ;;
               ptyprocess==0.7.0)
@@ -219,7 +219,7 @@ jobs:
               pydata-sphinx-theme==0.13.3)
                 echo "CORRECT version of package: $line"
                 ;;
-              Pygments==2.15.0)
+              Pygments==2.15.1)
                 echo "CORRECT version of package: $line"
                 ;;
               pyparsing==3.0.9)
@@ -249,7 +249,7 @@ jobs:
               snowballstemmer==2.2.0)
                 echo "CORRECT version of package: $line"
                 ;;
-              soupsieve==2.4)
+              soupsieve==2.4.1)
                 echo "CORRECT version of package: $line"
                 ;;
               Sphinx==5.0.2)
@@ -261,7 +261,7 @@ jobs:
               sphinx-comments==0.0.3)
                 echo "CORRECT version of package: $line"
                 ;;
-              sphinx-copybutton==0.5.1)
+              sphinx-copybutton==0.5.2)
                 echo "CORRECT version of package: $line"
                 ;;
               sphinx-jupyterbook-latex==0.5.2)
@@ -303,7 +303,7 @@ jobs:
               sphinxcontrib-serializinghtml==1.1.5)
                 echo "CORRECT version of package: $line"
                 ;;
-              SQLAlchemy==1.4.47)
+              SQLAlchemy==2.0.10)
                 echo "CORRECT version of package: $line"
                 ;;
               stack-data==0.6.2)
@@ -312,7 +312,7 @@ jobs:
               tabulate==0.9.0)
                 echo "CORRECT version of package: $line"
                 ;;
-              tornado==6.2)
+                tornado==6.3)
                 echo "CORRECT version of package: $line"
                 ;;
               traitlets==5.9.0)

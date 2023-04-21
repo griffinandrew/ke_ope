@@ -25,25 +25,19 @@ jobs:
           #sec_2_min=$(($elapsed/60.0))
           #echo "sec to min = $sec_2_min"
           min=${elapsed%.*}
-          echo "min = $min"
           sec_cut=${elapsed#*.}
           sec_round="${sec_cut:0:1}.${sec_cut:1}"
-          echo "sec cut = $sec_cut" 
-          echo "sec round = $sec_round"
           sec=$( echo "$sec_round * 6" | bc -l)
-
           echo "BUILD TIME:  $min MIN $sec SECS  or  $seconds seconds" > ./time.txt
-
       - name: extract size and display time and size
         run: |
           IMAGE=quay.io/rh_ee_keli/ucsls:stable-base-ope-latest
           docker run -d --name stable $IMAGE 
-          docker ps -a
+          #docker ps -a
           SIZE=$( docker images --format "{{.Size}}" $IMAGE )
           echo ""
           echo ""
           cat ./time.txt
-          #echo "BUILD TIME:  $min MIN $sec SECS  or  $seconds seconds"
           echo "" 
           echo "IMAGE SIZE:  $SIZE"
           echo ""
