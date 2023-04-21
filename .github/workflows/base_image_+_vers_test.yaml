@@ -20,7 +20,7 @@ jobs:
           make build
       - name: get base image and version
         run: |
-          docker inspect myimage:latest > image.json
+          docker inspect quay.io/rh_ee_keli/ucsls:stable-base-ope-latest > image.json
           VERSION=$(jq -r '.[0].Config.Labels["version"]' image.json)
           BASE_IMAGE=$(jq -r '.[0].Config.Image' image.json)
           echo "Version: $VERSION"
