@@ -18,7 +18,7 @@ jobs:
       - name: make build and calculate elapsed time # makes the container image build and then creates var with checksum value to be compared 
         run: |
           start=$(date +%s)
-          time make build -q
+          time make build --silent
           end=$(date +%s)
           elapsed=$((end-start))
           sec_2_min=$elapsed/60
