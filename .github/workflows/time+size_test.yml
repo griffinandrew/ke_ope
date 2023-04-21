@@ -29,7 +29,8 @@ jobs:
           sec_cut=${elapsed#*.}
           sec_round=${sec_cut:0:1}
           echo "sec cut = $sec_cut" 
-          sec=$( echo "$sec_cut * 6" | bc -l)
+          echo "sec round = $sec_round
+          sec=$( echo "$sec_round * 6" | bc -l)
 
           #- name: extract size
           #run: |
@@ -37,9 +38,11 @@ jobs:
           docker ps -a
           SIZE=$( docker images --format "{{.Size}}" quay.io/rh_ee_keli/ucsls:stable-base-ope-latest )
           echo ""
+          echo ""
           echo "BUILD TIME:  $min MIN $sec SECS  or  $seconds seconds"
           echo "" 
           echo "IMAGE SIZE:  $SIZE"
+          echo ""
           echo ""
           docker stop stable
                 
