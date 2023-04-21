@@ -22,8 +22,8 @@ jobs:
           end=$(date +%s)
           elapsed=$((end-start))
           sec_2_min=$elapsed/60
-          min=${elapsed%.*} #this assumes single digits thoooo
-          sec_cut=${elapsed#*.}
+          min=${sec_2_min%.*} #this assumes single digits thoooo
+          sec_cut=${sec_2_min#*.}
           sec=$((sec_cut * 60))
 
           #- name: extract size
