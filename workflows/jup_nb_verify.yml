@@ -1,0 +1,24 @@
+name: verify libs and deps from jup-nb
+on:
+  push:
+    branches: base-ope-image #might need to change to be test-book
+jobs:
+  jup-nb:
+    runs-on: ubuntu-latest #use the latest ubuntu container image 
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4 #use action to install python
+        with:
+          python-version: "3.9"
+      - name: Install dependencies #requirements docs unable to read, hard installing dependencies 
+        run: |
+          #pip install -r requirements.txt    
+          pip install jupyter-book matplotlib numpy pandas
+      - name: make build # makes the container image build 
+        run: |
+          make build
+      - name: check health #runs image and checks if it is up running after 12 seconds 
+        run: |
+          jupyter notebook
+          
