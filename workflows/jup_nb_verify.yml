@@ -21,4 +21,16 @@ jobs:
       - name: check health #runs image and checks if it is up running after 12 seconds 
         run: |
           jupyter notebook
+          IMAGE=quay.io/rh_ee_keli/ucsls:stable-base-ope-latest
           
+          echo "sudo apt update" >> ./test_script.sh
+          echo "juptyer notebook" >> ./test_script.sh
+          echo "sudo apt install python3-pip " >> ./test_script.sh
+
+
+
+          docker run -it --name stable $IMAGE ./test_script.sh #run the container and run the shell script
+
+          sleep 12
+
+          docker stop stable
