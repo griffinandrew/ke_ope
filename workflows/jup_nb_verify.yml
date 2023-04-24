@@ -27,8 +27,10 @@ jobs:
           # echo "juptyer notebook" >> ./test_script.sh
           #echo "sudo apt install python3-pip " >> test_script.sh
 
-          docker run -it --name stable $IMAGE .github/workflows/test_script.sh #run the container and run the shell script, this might need to be a path within the github workflow file
+          docker run --name stable $IMAGE #.github/workflows/test_script.sh #run the container and run the shell script, this might need to be a path within the github workflow file
 
           sleep 12
+
+          docker exec -it $IMAGE .github/workflows/test_script.sh
 
           docker stop stable
