@@ -116,4 +116,10 @@ RUN find / -path /proc -prune -o -type f 2>/dev/null -exec stat -c '%n %a' {} + 
 USER $NB_USER
 CMD  ["/bin/bash", "-c", "cd /home/jovyan ; start-notebook.sh"]
 
-RUN jupyter notebook -d -i 0.0.0.0 --port 8888
+
+EXPOSE 8888
+
+CMD ["start-notebook.sh", "--ip=0.0.0.0", "--port=8888", "--NotebookApp.token=''", "--NotebookApp.password=''", "--no-browser"]
+
+
+#RUN jupyter notebook -i 0.0.0.0 --port 8888
