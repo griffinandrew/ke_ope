@@ -35,7 +35,7 @@ jobs:
            
           #curl $LINK
           #sleep 12
-
+          echo "post curl"
           #docker exec -it $IMAGE .github/workflows/test_script.sh
           docker exec -it $IMAGE .github/workflows/test_script.sh
           docker exec $IMAGE pwd
