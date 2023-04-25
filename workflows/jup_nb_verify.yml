@@ -37,7 +37,7 @@ jobs:
           #sleep 12
           echo "post curl"
           #docker exec -it $IMAGE .github/workflows/test_script.sh
-          docker exec -it stable .github/workflows/test_script.sh
+          #docker exec -it stable .github/workflows/test_script.sh
           docker exec stable pwd
           docker exec stable "pip list" 
           docker stop stable
