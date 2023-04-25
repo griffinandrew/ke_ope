@@ -38,4 +38,6 @@ jobs:
 
           #docker exec -it $IMAGE .github/workflows/test_script.sh
           docker exec -it $IMAGE .github/workflows/test_script.sh
+          docker exec $IMAGE pwd
+          docker exec $IMAGE "pip list" 
           docker stop stable
