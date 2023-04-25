@@ -26,7 +26,9 @@ jobs:
           sleep 10
           #LINK=file:///home/jovyan/.local/share/jupyter/runtime/jpserver-7-open.html
         
-          HOST_PORT=$(docker port $IMAGE 8888/tcp | cut -d':' -f2)
+          docker ps -a
+
+          HOST_PORT=$(docker port stable 8888/tcp | cut -d':' -f2)
           curl http://localhost:$HOST_PORT
           
           #curl $LINK
