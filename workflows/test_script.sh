@@ -1,6 +1,6 @@
 #!/bin/bash
 
-juypter notebook 
+#juypter notebook 
 
 apt get update
 
