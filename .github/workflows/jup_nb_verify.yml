@@ -28,7 +28,9 @@ jobs:
         
           docker ps -a
 
-          HOST_PORT=$(docker port stable 8888/tcp | cut -d':' -f2)
+          #
+          #HOST_PORT=$(docker port stable 8888/tcp | cut -d':' -f2)
+          curl http://0.0.0.0:8888
           curl http://localhost:$HOST_PORT
           
           #curl $LINK
