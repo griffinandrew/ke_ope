@@ -48,9 +48,9 @@ jobs:
           echo "image sh"
           #docker exec -it $IMAGE .github/workflows/test_script.sh
           echo "container py"
-          docker exec -it stable .github/workflows/import_test.py
+          docker exec -i stable .github/workflows/import_test.py
           echo "container sh"
-          docker exec -it stable .github/workflows/test_script.sh
+          docker exec -i stable .github/workflows/test_script.sh
 
 
           docker stop stable
