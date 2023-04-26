@@ -42,6 +42,6 @@ jobs:
           docker exec stable ls
           docker exec stable pip list
         
-          docker exec stable .github/workflows/imort_test.py
+          docker exec stable python .github/workflows/imort_test.py
           
           docker stop stable
