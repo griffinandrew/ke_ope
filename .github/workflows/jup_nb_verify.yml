@@ -30,16 +30,18 @@ jobs:
 
           #
           #HOST_PORT=$(docker port stable 8888/tcp | cut -d':' -f2)
-          curl http://0.0.0.0:8888
+          #curl http://0.0.0.0:8888
           #curl http://localhost:$HOST_PORT
            
           #curl $LINK
           #sleep 12
-          echo "post curl"
+          #echo "post curl"
           #docker exec -it $IMAGE .github/workflows/test_script.sh
           #docker exec -it stable .github/workflows/test_script.sh
           docker exec stable pwd
           docker exec stable ls
           docker exec stable pip list
-
-          docker stop stabe
+        
+          docker exec stable .github/workflows/imort_test.py
+          
+          docker stop stable
