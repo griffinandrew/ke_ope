@@ -43,8 +43,13 @@ jobs:
           docker exec stable pip list
         
           #had python before path
+          echo "image py" 
+          docker exec -it $IMAGE .github/workflows/import_test.py
+          echo "image sh"
+          docker exec -it $IMAGE .github/workflows/test_script.sh
+          echo "container py"
           docker exec -it stable .github/workflows/import_test.py
-          
+          echo "container sh"
           docker exec -it stable .github/workflows/test_script.sh
 
 
