@@ -8,4 +8,6 @@ apt get update
 
 apt install python3-pip
 
+quit
+
 exit 

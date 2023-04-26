@@ -114,10 +114,11 @@ RUN chgrp root -R /home
 RUN find / -path /proc -prune -o -type f 2>/dev/null -exec stat -c '%n %a' {} + | sha256sum > /home/jovyan/permissions_checksum.txt
 
 USER $NB_USER
-CMD  ["/bin/bash", "-c", "cd /home/jovyan ; start-notebook.sh ; --ip=0.0.0.0 ; --port=8888 ; --NotebookApp.token='' ; --NotebookApp.password='' ; --no-browser"]
+#CMD  ["/bin/bash", "-c", "cd /home/jovyan ; start-notebook.sh ; --ip=0.0.0.0 ; --port=8888 ; --NotebookApp.token='' ; --NotebookApp.password='' ; --no-browser"]
 
+CMD  ["/bin/bash", "-c", "cd /home/jovyan ; start-notebook.sh"]
 
-EXPOSE 8888
+#EXPOSE 8888
 
 #CMD ["start-notebook.sh", "--ip=0.0.0.0", "--port=8888", "--NotebookApp.token=''", "--NotebookApp.password=''", "--no-browser"]
 
