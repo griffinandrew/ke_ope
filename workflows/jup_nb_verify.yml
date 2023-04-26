@@ -42,4 +42,4 @@ jobs:
           docker exec stable ls
           docker exec stable pip list
 
-          docker stop stabe
+          docker stop stable
