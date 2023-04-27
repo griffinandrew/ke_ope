@@ -15,7 +15,7 @@ jobs:
         run: |
           #pip install -r requirements.txt    
           pip install jupyter-book matplotlib numpy pandas
-          PY=$( cat .github/workflows/import_test.py"
+          PY=$( cat .github/workflows/import_test.py ) 
           echo $PY >> ./test.py
       - name: make build # makes the container image build 
         run: |
