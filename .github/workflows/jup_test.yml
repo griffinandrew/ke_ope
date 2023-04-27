@@ -59,7 +59,7 @@ jobs:
           #docker exec -it stable .github/workflows/test_script.sh
           docker exec stable pwd
           docker exec stable ls
-          # docker exec stable pip list
+          docker exec stable pip install ipywidgets
         
           #had python before path
           # echo "image py" 
