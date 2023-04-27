@@ -21,7 +21,7 @@ jobs:
       - name: check health #runs image and checks if it is up running after 12 seconds 
         run: |
           IMAGE=quay.io/rh_ee_keli/ucsls:stable-base-ope-latest
-          docker run -d --expose 8888 -p 8888:8888 --name stable /.github/workflows/import_test.py:/scripts $IMAGE #.github/workflows/test_script.sh #run the container and run the shell script, this might need to be a path within the github workflow file
+          docker run -d --name stable $IMAGE #.github/workflows/test_script.sh #run the container and run the shell script, this might need to be a path within the github workflow file
         
           sleep 10
           #LINK=file:///home/jovyan/.local/share/jupyter/runtime/jpserver-7-open.html
@@ -40,21 +40,22 @@ jobs:
           #docker exec -it stable .github/workflows/test_script.sh
           docker exec stable pwd
           docker exec stable ls
-          docker exec stable pip list
+          #docker exec stable pip list
         
           #had python before path
           # echo "image py" 
           #docker exec -it $IMAGE .github/workflows/import_test.py
           #echo "image sh"
           #docker exec -it $IMAGE .github/workflows/test_script.sh
-          echo "from scripts folder in container"
+          #echo "from scripts folder in container"
 
-          docker exec stable python /scripts/import_test.py 
+          #docker exec stable python /scripts/import_test.py 
           
-          echo "container py"
-          docker exec stable python .github/workflows/import_test.py
+          #echo "container py"
+          #docker exec stable python .github/workflows/import_test.py
           echo "container sh"
           docker exec stable .github/workflows/test_script.sh
 
 
-          docker stop stable
+
+
