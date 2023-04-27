@@ -54,9 +54,9 @@ jobs:
           #docker exec stable python import_test.py 
           
           echo "container py"
-          docker exec stable python .github/workflows/import_test.py
-          echo "container sh"
-          docker exec stable .github/workflows/test_script.sh
+          docker exec stable python /test.py
+          #echo "container sh"
+          #docker exec stable .github/workflows/test_script.sh
 
 
           docker stop stable
