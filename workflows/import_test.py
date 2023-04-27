@@ -1,4 +1,4 @@
-
+#!/usr/bin/env python
 from IPython.core.display import HTML, Markdown, TextDisplayObject, Javascript
 from IPython.display import display, IFrame, Image
 import ipywidgets as widgets
