@@ -28,8 +28,9 @@ jobs:
           sleep 10
           #LINK=file:///home/jovyan/.local/share/jupyter/runtime/jpserver-7-open.html
           cat ./test.py
-          docker ps -a
+          docker ps -a  
 
+          TEST=$( ./test.py)
           #
           #HOST_PORT=$(docker port stable 8888/tcp | cut -d':' -f2)
           #curl http://0.0.0.0:8888
@@ -54,7 +55,7 @@ jobs:
           #docker exec stable python import_test.py 
           
           echo "container py"
-          docker exec stable python /test.py
+          docker exec stable python $TEST
           #echo "container sh"
           #docker exec stable .github/workflows/test_script.sh
 
