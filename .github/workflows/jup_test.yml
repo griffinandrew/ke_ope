@@ -30,8 +30,8 @@ jobs:
           cat ./test.py
           docker ps -a  
                 
-          chmod +x test.py
-          TEST=$( test.py)
+          chmod +x /test.py
+          TEST=$( ./test.py)
           #
           #HOST_PORT=$(docker port stable 8888/tcp | cut -d':' -f2)
           #curl http://0.0.0.0:8888
