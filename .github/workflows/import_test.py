@@ -70,7 +70,7 @@ def main():
 
     for item in dir():
         print(item)
-
+    sys.exit(0)
 
 if __name__ == "__main__":
     main()
