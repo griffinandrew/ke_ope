@@ -15,12 +15,12 @@ jobs:
         run: |
           #pip install -r requirements.txt    
           pip install jupyter-book matplotlib numpy pandas ipywidgets notebook
-          PY=$( cat .github/workflows/import_test.py ) 
+          #PY=$( cat .github/workflows/import_test.py ) 
           #$PY | while read line
           #do 
           #      $line >> ./test.py
           #done 
-          
+          cp .github/workflows/import_test.ipynb ./test.ipynb
           cp .github/workflows/import_test.py ./test_sc.py    
                 #Y >> ./test.py
       - name: make build # makes the container image build 
@@ -41,18 +41,22 @@ jobs:
           echo "cp"
 
           cat ./test_sc.py
+
+          cat ./test.ipynb 
           docker ps -a  
           
           chmod +x ./test_sc.py
-          #chmod +x ./test.py
+          chmod +x ./test.ipynb
           TEST=$( ./test_sc.py)
+
+          TEST2=$( ./test.ipynb)
           #
           #HOST_PORT=$(docker port stable 8888/tcp | cut -d':' -f2)
            
           docker exec stable pwd
           docker exec stable ls
           docker exec stable python $TEST
-          docker exec stable jupyter notebook $TEST
+          docker exec stable jupyter notebook $TEST2
         
           #had python before path
           # echo "image py" 
