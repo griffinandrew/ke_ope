@@ -14,7 +14,7 @@ jobs:
       - name: Install dependencies #requirements docs unable to read, hard installing dependencies 
         run: |
           #pip install -r requirements.txt    
-          pip install jupyter-book matplotlib numpy pandas ipywidgets notebook time array
+          pip install jupyter-book matplotlib numpy pandas ipywidgets notebook
           PY=$( cat .github/workflows/import_test.py ) 
           #$PY | while read line
           #do 
