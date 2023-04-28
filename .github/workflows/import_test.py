@@ -1,7 +1,10 @@
 #!/usr/bin/env python
 
+try:
+    from IPython.core.display import HTML, Markdown, TextDisplayObject, Javascript
+except ImportError:
+    raise ImportError('core.display modules failed to load')
 
-from IPython.core.display import HTML, Markdown, TextDisplayObject, Javascript
 from IPython.display import display, IFrame, Image
 import ipywidgets as widgets
 from ipywidgets import interact, fixed, Layout
