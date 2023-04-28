@@ -52,7 +52,7 @@ jobs:
           docker exec stable pwd
           docker exec stable ls
           docker exec stable python $TEST
-          docker exec stable jupyter notebook $TEST && stop
+          docker exec stable jupyter notebook $TEST
         
           #had python before path
           # echo "image py" 
