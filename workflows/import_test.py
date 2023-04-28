@@ -12,57 +12,57 @@ except ImportError:
 
 try: 
     import ipywidgets as widgets
-except ImportError
+except ImportError:
     raise ImportError('ipywidgets fail')
 
 try:
     from ipywidgets import interact, fixed, Layout
-except ImportError
+except ImportError:
     raise ImportError('interact, fixed layout failed')
 
 try:
     import os, requests, pty, re, subprocess, struct, sys, fcntl, termios, select
-except ImportError
+except ImportError:
     raise ImportError(" os, requests, pty, re, subprocess, struct, sys, fcntl, termios, select failed")
 
 try: 
     from notebook.notebookapp import list_running_servers
-except ImportError
+except ImportError:
     raise ImportError("notebook.notebookapp import list_running_servers failed")
 
 try:
     import matplotlib
-except ImportError
+except ImportError:
     raise ImportError("import matplotlib failed")
 
 try:
     import matplotlib.pyplot as plt
-except ImportError
+except ImportError:
     raise ImportError("import matplotlib.pyplot as plt failed")
 
 try:
     from matplotlib import animation
-except ImportError
+except ImportError:
     raise ImportError("from matplotlib import animation failed")
 
 try:
     import numpy as np
-except ImportError
+except ImportError:
     raise ImportError("import numpy as np failed")
 
 try:
     import pandas as pd
-except ImportError
+except ImportError:
     raise ImportError(" import pandas as pd failed")
 
 try:
     import time
-except ImportError
+except ImportError:
     raise ImportError("import time failed")
 
 try:
     import array
-except ImportError
+except ImportError:
     raise ImportError("import array failed")
 
 
@@ -70,8 +70,6 @@ def main():
 
     for item in dir():
         print(item)
-
-
 
 
 if __name__ == "__main__":
