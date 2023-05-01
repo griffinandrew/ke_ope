@@ -48,7 +48,7 @@ jobs:
           cat ./stop.ipynb
           cat ./test.ipynb
           cat ./stop.ipynb 
-          docker ps -a  
+          #docker ps -a  
           
           chmod +x ./test_sc.py
           chmod +x ./test.ipynb
@@ -58,8 +58,8 @@ jobs:
           TEST2=$( ./test.ipynb)
           TEST3=$( ./stop.ipynb)
           #
-          docker ps -a
-          #docker exec stable pwd
+          #docker ps -a
+          ##docker exec stable pwd
           #docker exec stable ls
           #docker exec stable python $TEST
           echo "exec and run"
@@ -68,7 +68,7 @@ jobs:
            
           echo "quitting"
           #HOST_PORT=$(docker port stable 8888/tcp | cut -d':' -f2)
-          docker exec stable stop
+          # docker exec stable stop
           #docker exec stable jupyter notebook stop
           
           #had python before path
@@ -84,6 +84,5 @@ jobs:
           #docker exec stable python $TEST
           #echo "container sh"
           #docker exec stable .github/workflows/test_script.sh
-
 
           docker stop stable

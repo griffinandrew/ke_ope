@@ -45,7 +45,7 @@ jobs:
           cat ./stop.ipynb
           cat ./test.ipynb
           cat ./stop.ipynb 
-          docker ps -a  
+          #docker ps -a  
           
           chmod +x ./test_sc.py
           chmod +x ./test.ipynb
@@ -65,8 +65,14 @@ jobs:
           docker ps -a
           docker exec stable pwd
           docker exec stable ls
+          
           #docker exec stable python $TEST
+          echo "start nb"
           docker exec stable jupyter notebook  # $TEST2 #$TEST3
+          echo "run file"
+          docker exec stable jupyter run $TEST2
+
+
           #had python before path
           # echo "image py" 
           #docker exec -it $IMAGE .github/workflows/import_test.py
