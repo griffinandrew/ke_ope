@@ -52,9 +52,9 @@ jobs:
           echo "ps -a" 
           docker ps -a  
           echo "chmod"
-          #chmod +x ./test_sc.py
-          #chmod +x ./test.ipynb
-          #chmod +x ./stop.ipynb
+          chmod +x ./test_sc.py
+          chmod +x ./test.ipynb
+          chmod +x ./stop.ipynb
           TEST=$( ./test_sc.py)
 
           TEST2=$( ./test.ipynb)
@@ -64,7 +64,7 @@ jobs:
           docker ps -a
           echo "should be listed"
           ##docker exec stable pwd
-          #docker exec stable ls
+          docker exec stable ls
           #docker exec stable python $TEST
           echo "exec and run"
           docker exec stable python $TEST #$TEST3

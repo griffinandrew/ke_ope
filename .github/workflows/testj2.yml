@@ -54,8 +54,8 @@ jobs:
 
           TEST2=$( ./test.ipynb)
           TEST3=$( ./stop.ipynb)
-          #
-          #
+          
+          
           echo "run"
           docker run -d --name stable $IMAGE #juypter notebook
           echo "sleep"
