@@ -39,12 +39,12 @@ jobs:
           
           #cat ./test.py
 
-          echo "cp"
+          #echo "cp"
 
-          cat ./test_sc.py
-          cat ./stop.ipynb
-          cat ./test.ipynb
-          cat ./stop.ipynb 
+          #cat ./test_sc.py
+          #cat ./stop.ipynb
+          #cat ./test.ipynb
+          #cat ./stop.ipynb 
           #docker ps -a  
           
           chmod +x ./test_sc.py
@@ -56,9 +56,9 @@ jobs:
           TEST3=$( ./stop.ipynb)
           #
           #
-
+          echo "run"
           docker run -d --name stable $IMAGE #juypter notebook
-
+          echo "sleep"
           sleep 10
           #HOST_PORT=$(docker port stable 8888/tcp | cut -d':' -f2)
           echo "list"

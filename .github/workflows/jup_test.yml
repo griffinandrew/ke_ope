@@ -42,7 +42,7 @@ jobs:
           
           #cat ./test.py
 
-          echo "cp"
+          #echo "cp"
 
           #cat ./test_sc.py
           #cat ./stop.ipynb
@@ -58,8 +58,9 @@ jobs:
           TEST2=$( ./test.ipynb)
           TEST3=$( ./stop.ipynb)
           #
+          echo "ps -a"
           docker ps -a
-
+          echo "should be listed"
           ##docker exec stable pwd
           #docker exec stable ls
           #docker exec stable python $TEST
