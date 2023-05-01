@@ -47,8 +47,10 @@ jobs:
           #cat ./test_sc.py
           #cat ./stop.ipynb
           #cat ./test.ipynb
-          #cat ./stop.ipynb 
-          #docker ps -a  
+          #cat ./stop.ipynb
+
+          echo "ps -a" 
+          docker ps -a  
           echo "chmod"
           chmod +x ./test_sc.py
           chmod +x ./test.ipynb
