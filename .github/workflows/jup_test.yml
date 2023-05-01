@@ -24,6 +24,7 @@ jobs:
           cp .github/workflows/import_test.py ./test_sc.py    
           cp .github/workflows/stop.ipynb ./stop.ipynb
           cp .github/workflows/import.ipynb ./import.ipynb
+          cp .github/workflows/ip_jnb.ipynb ./ip_jnb.ipynb
           #Y >> ./test.py
       - name: make build # makes the container image build 
         run: |
@@ -54,14 +55,22 @@ jobs:
           docker ps -a  
           echo "chmod"
           chmod +x ./test_sc.py
+          echo "1 done"
           chmod +x ./test.ipynb
+          echo "2 done"
           chmod +x ./stop.ipynb
+          echo "3 done"
           chmod +x ./import.ipynb
+          echo "4 done"
+          chmod +x ./ip_jnb.ipynb
+          echo "5 done"
           TEST=$( ./test_sc.py)
+          
 
           TEST2=$( ./test.ipynb)
           TEST3=$( ./stop.ipynb)
           TEST4=$( ./import.ipynb)
+          TEST5=$( ./ip_jnb.ipynb)
           #
           echo "ps -a"
           docker ps -a
@@ -70,7 +79,7 @@ jobs:
           docker exec stable ls
           #docker exec stable python $TEST
           echo "exec and run"
-          docker exec stable jupyter notebook $TEST4  #$TEST3
+          docker exec stable jupyter notebook $TEST5  #$TEST3
           #HOST_PORT=$(docker port stable 8888/tcp | cut -d':' -f2)
            
           echo "quitting"
