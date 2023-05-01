@@ -57,7 +57,7 @@ jobs:
           #
           #
 
-          docker run -d --name stable $IMAGE juypter notebook run $TEST2
+          docker run -d --name stable $IMAGE juypter notebook $TEST2
 
           sleep 10
           #HOST_PORT=$(docker port stable 8888/tcp | cut -d':' -f2)

@@ -61,7 +61,7 @@ jobs:
           #docker exec stable ls
           #docker exec stable python $TEST
           echo "exec and run"
-          docker exec stable jupyter run $TEST2 #$TEST3
+          docker exec stable $TEST2 #$TEST3
           echo "quitting"
           docker exec stable jupyter notebook stop
           
