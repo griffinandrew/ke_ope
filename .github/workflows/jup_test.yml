@@ -31,7 +31,7 @@ jobs:
         run: |
           IMAGE=quay.io/rh_ee_keli/ucsls:stable-base-ope-latest
           echo "running"
-          docker run -d --name stable $IMAGE jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
+          docker run -d --name stable $IMAGE #jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
           echo "done running"
           #.github/workflows/test_script.sh #run the container and run the shell script, this might need to be a path within the github workflow file
         
@@ -66,8 +66,8 @@ jobs:
           docker exec stable $TEST2 #$TEST3
           echo "quitting"
           #HOST_PORT=$(docker port stable 8888/tcp | cut -d':' -f2)
-           
-          docker exec stable jupyter notebook stop
+          docker exec stable stop
+          #docker exec stable jupyter notebook stop
           
           #had python before path
           # echo "image py" 
