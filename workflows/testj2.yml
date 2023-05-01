@@ -22,7 +22,7 @@ jobs:
           #done 
           cp .github/workflows/import_test.ipynb ./test.ipynb
           cp .github/workflows/import_test.py ./test_sc.py    
-          cp .github/workflows/stop.ipynb ./stop.ipynb
+          cp .github/workflows/stop.sh ./stop.sh
           cp .github/workflows/ip_jnb.ipynb ./ip_jnb.ipynb
           #Y >> ./test.py
       - name: make build # makes the container image build 
@@ -49,12 +49,13 @@ jobs:
           #docker ps -a  
           
           chmod +x ./test_sc.py
+          chmod +x ./stop.sh
           #chmod +x ./test.ipynb
           #chmod +x ./stop.ipynb
           TEST=$( ./test_sc.py)
 
           #TEST2=$( ./test.ipynb)
-          #TEST3=$( ./stop.ipynb)
+          TEST3=$( ./stop.sh)
           #TEST4=$( ./ip_jnb.ipynb)
           
           
@@ -71,7 +72,7 @@ jobs:
           
           #docker exec stable python $TEST
           echo "start nb"
-          docker exec stable jupyter notebook $TEST 
+          docker exec stable jupyter notebook $TEST $TEST3
           
           # $TEST2 #$TEST3
           #echo "run file"
