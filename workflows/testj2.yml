@@ -57,16 +57,16 @@ jobs:
           #
           #
 
-          docker run -d --name stable $IMAGE juypter notebook
+          docker run -d --name stable $IMAGE #juypter notebook
 
           sleep 10
           #HOST_PORT=$(docker port stable 8888/tcp | cut -d':' -f2)
            
           docker ps -a
-          #docker exec stable pwd
-          #docker exec stable ls
+          docker exec stable pwd
+          docker exec stable ls
           #docker exec stable python $TEST
-          #docker exec stable jupyter run $TEST2 #$TEST3
+          docker exec stable jupyter notebook  # $TEST2 #$TEST3
           #had python before path
           # echo "image py" 
           #docker exec -it $IMAGE .github/workflows/import_test.py
