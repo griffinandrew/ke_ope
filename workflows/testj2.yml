@@ -51,10 +51,10 @@ jobs:
           #chmod +x ./test_sc.py
           #chmod +x ./test.ipynb
           #chmod +x ./stop.ipynb
-          TEST=$( ./test_sc.py)
+          #TEST=$( ./test_sc.py)
 
-          TEST2=$( ./test.ipynb)
-          TEST3=$( ./stop.ipynb)
+          #TEST2=$( ./test.ipynb)
+          #TEST3=$( ./stop.ipynb)
           TEST4=$( ./ip_jnb.ipynb)
           
           

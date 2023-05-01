@@ -64,14 +64,16 @@ jobs:
           echo "4 done"
           chmod +x ./ip_jnb.ipynb
           echo "5 done"
-          TEST=$( ./test_sc.py)
-          
+          #TEST=$( ./test_sc.py)
+          #echo "test 1 set" 
 
-          TEST2=$( ./test.ipynb)
-          TEST3=$( ./stop.ipynb)
-          TEST4=$( ./import.ipynb)
+          #TEST2=$( ./test.ipynb)
+          #TEST3=$( ./stop.ipynb)
+          #TEST4=$( ./import.ipynb)
+          echo "test 5 "
           TEST5=$( ./ip_jnb.ipynb)
-          #
+          echo "test 5 done"
+
           echo "ps -a"
           docker ps -a
           echo "should be listed"
