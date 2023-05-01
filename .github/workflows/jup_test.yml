@@ -60,8 +60,7 @@ jobs:
           docker exec stable pwd
           docker exec stable ls
           #docker exec stable python $TEST
-          docker exec stable jupyter notebook $TEST2 $TEST3
-        
+          docker exec stable jupyter run $TEST2 #$TEST3
           #had python before path
           # echo "image py" 
           #docker exec -it $IMAGE .github/workflows/import_test.py
