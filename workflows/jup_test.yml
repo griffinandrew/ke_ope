@@ -22,7 +22,7 @@ jobs:
           #done 
           cp .github/workflows/import_test.ipynb ./test.ipynb
           cp .github/workflows/import_test.py ./test_sc.py    
-          #cp .github/workflows/stop.ipynb ./stop.ipynb
+          cp .github/workflows/stop.sh ./stop.sh
           cp .github/workflows/import.ipynb ./import.ipynb
           cp .github/workflows/ip_jnb.ipynb ./ip_jnb.ipynb
           #Y >> ./test.py
@@ -33,7 +33,9 @@ jobs:
         run: |
           IMAGE=quay.io/rh_ee_keli/ucsls:stable-base-ope-latest
           echo "running"
-          docker run -d --name stable $IMAGE #jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
+          docker run -d --name stable $IMAGE jupyter notebook --ip 0.0.0.0 --no-browser
+          
+          #jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
           echo "done running"
           #.github/workflows/test_script.sh #run the container and run the shell script, this might need to be a path within the github workflow file
           echo "sleep"
@@ -58,17 +60,17 @@ jobs:
           echo "1 done"
           chmod +x ./test.ipynb
           echo "2 done"
-          #chmod +x ./stop.ipynb
+          chmod +x ./stop.sh
           echo "3 done"
           chmod +x ./import.ipynb
           echo "4 done"
           chmod +x ./ip_jnb.ipynb
           echo "5 done"
-          #TEST=$( ./test_sc.py)
+          TEST=$( ./test_sc.py)
           #echo "test 1 set" 
 
           #TEST2=$( ./test.ipynb)
-          #TEST3=$( ./stop.ipynb)
+          TEST3=$( ./stop.sh)
           #TEST4=$( ./import.ipynb)
           echo "test 5 "
           TEST5=$( ./ip_jnb.ipynb)
@@ -81,7 +83,7 @@ jobs:
           docker exec stable ls
           #docker exec stable python $TEST
           echo "exec and run"
-          docker exec stable jupyter notebook $TEST5  #$TEST3
+          docker exec stable jupyter run $TEST $TEST3
           #HOST_PORT=$(docker port stable 8888/tcp | cut -d':' -f2)
            
           echo "quitting"
