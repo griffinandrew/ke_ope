@@ -22,7 +22,7 @@ jobs:
           #done 
           cp .github/workflows/import_test.ipynb ./test.ipynb
           cp .github/workflows/import_test.py ./test_sc.py    
-          cp .github/workflows/stop.ipynb ./stop.ipynb
+          #cp .github/workflows/stop.ipynb ./stop.ipynb
           cp .github/workflows/import.ipynb ./import.ipynb
           cp .github/workflows/ip_jnb.ipynb ./ip_jnb.ipynb
           #Y >> ./test.py
@@ -58,7 +58,7 @@ jobs:
           echo "1 done"
           chmod +x ./test.ipynb
           echo "2 done"
-          chmod +x ./stop.ipynb
+          #chmod +x ./stop.ipynb
           echo "3 done"
           chmod +x ./import.ipynb
           echo "4 done"
