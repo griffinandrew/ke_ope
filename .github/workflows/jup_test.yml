@@ -44,10 +44,10 @@ jobs:
 
           echo "cp"
 
-          cat ./test_sc.py
-          cat ./stop.ipynb
-          cat ./test.ipynb
-          cat ./stop.ipynb 
+          #cat ./test_sc.py
+          #cat ./stop.ipynb
+          #cat ./test.ipynb
+          #cat ./stop.ipynb 
           #docker ps -a  
           
           chmod +x ./test_sc.py
@@ -58,7 +58,8 @@ jobs:
           TEST2=$( ./test.ipynb)
           TEST3=$( ./stop.ipynb)
           #
-          #docker ps -a
+          docker ps -a
+
           ##docker exec stable pwd
           #docker exec stable ls
           #docker exec stable python $TEST
