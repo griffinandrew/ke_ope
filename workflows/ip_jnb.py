@@ -66,10 +66,5 @@ except ImportError:
     raise ImportError("import array failed")
 
 
-#!/bin/bash
-jupyter notebook stop 
-
-
-
 
 

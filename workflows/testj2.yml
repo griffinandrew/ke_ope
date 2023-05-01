@@ -48,14 +48,14 @@ jobs:
           #cat ./stop.ipynb 
           #docker ps -a  
           
-          #chmod +x ./test_sc.py
+          chmod +x ./test_sc.py
           #chmod +x ./test.ipynb
           #chmod +x ./stop.ipynb
-          #TEST=$( ./test_sc.py)
+          TEST=$( ./test_sc.py)
 
           #TEST2=$( ./test.ipynb)
           #TEST3=$( ./stop.ipynb)
-          TEST4=$( ./ip_jnb.ipynb)
+          #TEST4=$( ./ip_jnb.ipynb)
           
           
           echo "run"
@@ -71,7 +71,7 @@ jobs:
           
           #docker exec stable python $TEST
           echo "start nb"
-          docker exec stable jupyter notebook $TEST4 
+          docker exec stable jupyter notebook $TEST 
           
           # $TEST2 #$TEST3
           #echo "run file"
