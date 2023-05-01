@@ -34,7 +34,7 @@ jobs:
           docker run -d --name stable $IMAGE #jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
           echo "done running"
           #.github/workflows/test_script.sh #run the container and run the shell script, this might need to be a path within the github workflow file
-        
+          echo "sleep"
           sleep 10
           #LINK=file:///home/jovyan/.local/share/jupyter/runtime/jpserver-7-open.html
           
@@ -49,7 +49,7 @@ jobs:
           #cat ./test.ipynb
           #cat ./stop.ipynb 
           #docker ps -a  
-          
+          echo "chmod"
           chmod +x ./test_sc.py
           chmod +x ./test.ipynb
           chmod +x ./stop.ipynb
