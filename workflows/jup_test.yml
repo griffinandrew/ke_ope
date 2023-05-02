@@ -33,7 +33,7 @@ jobs:
         run: |
           IMAGE=quay.io/rh_ee_keli/ucsls:stable-base-ope-latest
           echo "running"
-          docker run -d --name stable $IMAGE #--ip 0.0.0.0 --no-browser
+          docker run -d --name stable -p 8888:8888 $IMAGE #--ip 0.0.0.0 --no-browser
           
           #jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
           echo "done running"
@@ -82,8 +82,10 @@ jobs:
           ##docker exec stable pwd
           docker exec stable ls
           #docker exec stable python $TEST
+          
           echo "exec and run"
-          docker exec stable jupyter nbconvert --execute --to notebook --output /dev/null $TEST5
+          docker exec stable jupyter nbconvert --execute --to notebook --output /dev/null $TEST5 --execute "--no-browser --NotebookApp.token=''"
+          #docker exec stable jupyter nbconvert --execute --to notebook --output /dev/null $TEST5
           #docker exec stable jupyter run $TEST $TEST3
           #HOST_PORT=$(docker port stable 8888/tcp | cut -d':' -f2)
            
