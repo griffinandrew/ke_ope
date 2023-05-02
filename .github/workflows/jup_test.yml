@@ -26,13 +26,16 @@ jobs:
           cp .github/workflows/import.ipynb ./import.ipynb
           cp .github/workflows/ip_jnb.ipynb ./ip_jnb.ipynb
           #Y >> ./test.py
-      - name: make build # makes the container image build 
-        run: |
-          make build
+          #- name: make build # makes the container image build 
+          #run: |
+          #make build
 
       - name: check health
         run: |
-          IMAGE=quay.io/rh_ee_keli/ucsls:stable-base-ope-latest
+          #IMAGE=quay.io/rh_ee_keli/ucsls:stable-base-ope-latest
+           IMAGE=quay.io/rh_ee_keli/ope:image-template-NERC-test
+          docker pull $IMAGE
+          docker image ls
           echo "running"
           docker run -d --name test -p 8889:8888 $IMAGE # use a different port number here
           echo "done running"
