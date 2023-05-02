@@ -120,7 +120,7 @@ jobs:
           echo "exec and run"
           
 
-          docker exec -d stable jupyter nbconvert --execute --output /dev/null test_sc.ipynb --execute "--ExecutePreprocessor.timeout=-1"
+          docker exec -d stable jupyter nbconvert --execute --output /dev/null test.ipynb --execute "--ExecutePreprocessor.timeout=-1"
           #docker exec stable jupyter nbconvert --execute --to notebook --output /dev/null $FILE --execute "--ExecutePreprocessor.timeout=-1"
 
           #docker exec stable jupyter nbconvert --execute --to notebook --output /dev/null $TEST5 --execute "--no-browser --NotebookApp.token=''"
