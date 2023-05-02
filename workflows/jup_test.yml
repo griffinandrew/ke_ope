@@ -80,11 +80,20 @@ jobs:
           docker ps -a
           echo "should be listed"
           ##docker exec stable pwd
-          docker exec stable ls
+          #docker exec stable ls
           #docker exec stable python $TEST
           
+          echo "starting nb"
+          docker exec -d stable jupyter notebook --no-browser --ip 0.0.0.0 --NotebookApp.token=''
+          
+          sleep 5
+          echo "done sleep, listing"
+          docker ps -a
+
           echo "exec and run"
-          docker exec stable jupyter nbconvert --execute --to notebook --output /dev/null $TEST5 --execute "--no-browser --NotebookApp.token=''"
+          docker exec stable jupyter nbconvert --execute --to notebook --output /dev/null $TEST5 --execute "--ExecutePreprocessor.timeout=-1"
+
+          #docker exec stable jupyter nbconvert --execute --to notebook --output /dev/null $TEST5 --execute "--no-browser --NotebookApp.token=''"
           #docker exec stable jupyter nbconvert --execute --to notebook --output /dev/null $TEST5
           #docker exec stable jupyter run $TEST $TEST3
           #HOST_PORT=$(docker port stable 8888/tcp | cut -d':' -f2)
