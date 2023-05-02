@@ -29,11 +29,23 @@ jobs:
       - name: make build # makes the container image build 
         run: |
           make build
-      - name: check health #runs image and checks if it is up running after 12 seconds 
+
+      - name: check health
         run: |
           IMAGE=quay.io/rh_ee_keli/ucsls:stable-base-ope-latest
           echo "running"
-          docker run -d --name stable -p 8888:8888 $IMAGE #--ip 0.0.0.0 --no-browser
+          docker run -d --name stable -p 8889:8888 $IMAGE # use a different port number here
+          echo "done running"
+          sleep 10
+          echo "ps -a" 
+          docker ps -a  
+          echo "quitting"
+          docker stop stable
+      - name: run jup #runs image and checks if it is up running after 12 seconds 
+        run: |
+          IMAGE=quay.io/rh_ee_keli/ucsls:stable-base-ope-latest
+          echo "running"
+          docker run -d --name stable -p 8889:8888 $IMAGE #--ip 0.0.0.0 --no-browser
           
           #jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
           echo "done running"
