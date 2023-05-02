@@ -92,8 +92,9 @@ jobs:
           echo "test 5 "
           #TEST5=$( ./ip_jnb.ipynb)
           
-          IPYNB=$(p2j ./test_sc.py)
+          IPYNB=$(p2j test_sc.py)
           FILE=$IPYNB
+          echo "$FILE is converted"
           echo "test 5 done"
 
           echo "ps -a"
