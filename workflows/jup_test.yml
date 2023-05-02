@@ -38,7 +38,7 @@ jobs:
           docker pull $IMAGE
           docker image ls
           echo "running"
-          docker run -d --name test -p 8889:8888 $IMAGE # use a different port number here
+          docker run -d --name test $IMAGE # use a different port number here
           echo "done running"
           sleep 10
           echo "ps -a" 
