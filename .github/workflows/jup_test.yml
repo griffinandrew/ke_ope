@@ -14,7 +14,7 @@ jobs:
       - name: Install dependencies #requirements docs unable to read, hard installing dependencies 
         run: |
           #pip install -r requirements.txt    
-          pip install jupyter-book matplotlib numpy pandas ipywidgets notebook
+          pip install jupyter-book matplotlib numpy pandas ipywidgets notebook nbconvert
           #PY=$( cat .github/workflows/import_test.py ) 
           #$PY | while read line
           #do 
@@ -33,7 +33,7 @@ jobs:
         run: |
           IMAGE=quay.io/rh_ee_keli/ucsls:stable-base-ope-latest
           echo "running"
-          docker run -d --name stable $IMAGE jupyter notebook --ip 0.0.0.0 --no-browser
+          docker run -d --name stable $IMAGE --ip 0.0.0.0 --no-browser
           
           #jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
           echo "done running"
@@ -83,7 +83,8 @@ jobs:
           docker exec stable ls
           #docker exec stable python $TEST
           echo "exec and run"
-          docker exec stable jupyter run $TEST $TEST3
+          docker exec stable jupyter nbconvert --execute --to notebook --output /dev/null $TEST5
+          #docker exec stable jupyter run $TEST $TEST3
           #HOST_PORT=$(docker port stable 8888/tcp | cut -d':' -f2)
            
           echo "quitting"
