@@ -2,8 +2,7 @@ name: jup-nb-test
 on:
   push:
     branches: base-ope-image #might need to change to be test-book
-env:
-    IMAGE=quay.io/rh_ee_keli/ope:image-template-NERC-test
+env: IMAGE:quay.io/rh_ee_keli/ope:image-template-NERC-test
 jobs:
   jup-nb:
     runs-on: ubuntu-latest #use the latest ubuntu container image 
