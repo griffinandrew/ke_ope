@@ -106,7 +106,7 @@ jobs:
           
           echo "starting nb"
           # docker exec -d stable jupyter notebook --no-browser --ip 0.0.0.0 --NotebookApp.token=""
-          docker exec -d stable jupyter notebook --allow-root --no-browser --ip 0.0.0.0 --NotebookApp.token='' --port 8888
+          docker exec stable jupyter notebook --allow-root --no-browser --ip 0.0.0.0 --NotebookApp.token='' --port 8888
           
           sleep 10
           echo "done sleep, listing"
@@ -120,7 +120,7 @@ jobs:
           echo "exec and run"
           
 
-          docker exec -d stable jupyter nbconvert --execute --output /dev/null test.ipynb --execute "--ExecutePreprocessor.timeout=-1"
+          docker exec stable jupyter nbconvert --execute --output /dev/null test.ipynb --execute "--ExecutePreprocessor.timeout=-1"
           #docker exec stable jupyter nbconvert --execute --to notebook --output /dev/null $FILE --execute "--ExecutePreprocessor.timeout=-1"
 
           #docker exec stable jupyter nbconvert --execute --to notebook --output /dev/null $TEST5 --execute "--no-browser --NotebookApp.token=''"
