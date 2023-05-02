@@ -115,10 +115,12 @@ jobs:
 
           echo "see if .ipynb is there "
           ls
+          echo "chmod ipynb"
+          chmod +x test_sc.ipynb
           echo "exec and run"
           
 
-          docker exec stable jupyter nbconvert --execute --output /dev/null ./test_sc.ipynb --execute "--ExecutePreprocessor.timeout=-1"
+          docker exec stable jupyter nbconvert --execute --output /dev/null test_sc.ipynb --execute "--ExecutePreprocessor.timeout=-1"
           #docker exec stable jupyter nbconvert --execute --to notebook --output /dev/null $FILE --execute "--ExecutePreprocessor.timeout=-1"
 
           #docker exec stable jupyter nbconvert --execute --to notebook --output /dev/null $TEST5 --execute "--no-browser --NotebookApp.token=''"
