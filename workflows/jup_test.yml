@@ -152,4 +152,5 @@ jobs:
           docker logs stable
           docker inspect stable
           docker stop stable
+          docker inspect stable
 
