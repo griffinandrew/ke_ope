@@ -30,8 +30,10 @@ jobs:
           #$GID
           id -u 
           id -g
-          IM_UID=$(docker exec stable id -u)
-          IM_GID=$(docker exec stable id -g)
-          $IM_UID
-          $IM_UID
+          docker exec stable id -u
+          docker exec stable id -g
+          #IM_UID=$(docker exec stable id -u)
+          #IM_GID=$(docker exec stable id -g)
+          #$IM_UID
+          #$IM_GID
 
