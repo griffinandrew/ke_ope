@@ -11,15 +11,11 @@ jobs:
         uses: actions/setup-python@v4 #use action to install python
         with:
           python-version: "3.9"
-      - name: Run Cypress Test
-        uses: cypress-io/github-action@v4
-        with: 
-          command: npx cypress run
-          browser: chrome
       - name: Install dependencies #requirements docs unable to read, hard installing dependencies 
         run: |
           #pip install -r requirements.txt    
           pip install jupyter-book matplotlib numpy pandas
+          npm install cypress
       - name: pull image
         run: |
           IMAGE=quay.io/rh_ee_keli/ope:image-template-NERC-test
