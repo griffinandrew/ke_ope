@@ -26,7 +26,7 @@ jobs:
       - name: run
         run: |
           #IMAGE=quay.io/rh_ee_keli/ope:image-template-NERC-test
-          IMAGE=cypress/base:ubuntu18-node12.14.1
+          IMAGE=cypress/base:ubuntu19-node12.14.1
           docker image ls
           docker run --cypress stable $IMAGE
           docker ps -a 
