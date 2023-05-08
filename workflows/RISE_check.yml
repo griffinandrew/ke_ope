@@ -27,8 +27,11 @@ jobs:
         run: |
           #IMAGE=quay.io/rh_ee_keli/ope:image-template-NERC-test
           IMAGE=cypress/base:ubuntu18-node12.14.1
-          docker run -d --name stable $IMAGE
+          docker run --name stable $IMAGE
           docker ps -a 
+          echo "sleeping"
+          sleep 15
+          
           cat ./test.spec.js
           docker exec stable ./test.spec.js
 
