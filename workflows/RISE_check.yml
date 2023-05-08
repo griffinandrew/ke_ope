@@ -20,13 +20,16 @@ jobs:
       - name: pull image
         run: |
           #IMAGE=quay.io/rh_ee_keli/ope:image-template-NERC-test
-          IMAGE=cypress/base:ubuntu19-node12.14.1
+          #IMAGE=cypress/base:ubuntu19-node12.14.1
+          docker IMAGE=cypress/base:10
           docker pull $IMAGE
           docker image ls 
       - name: run
         run: |
           #IMAGE=quay.io/rh_ee_keli/ope:image-template-NERC-test
-          IMAGE=cypress/base:ubuntu19-node12.14.1
+          #IMAGE=cypress/base:ubuntu19-node12.14.1
+          
+          IMAGE=cypress/base:10
           docker image ls
           docker run --name cypress $IMAGE
           docker ps -a 
@@ -36,7 +39,7 @@ jobs:
           docker inspect cypress
           docker ps -a
           cat ./test.spec.js
-          docker exec cypress ./test.spec.js
+          docker exec cypress cypress run --spec ./test.spec.js
           sleep 5
           docker ps -a
           #- name: run cypress test
