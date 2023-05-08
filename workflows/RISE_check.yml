@@ -33,6 +33,7 @@ jobs:
           docker logs cypress
           echo "sleeping"
           sleep 15
+          docker inspect cypress
           docker ps -a
           cat ./test.spec.js
           docker exec cypress ./test.spec.js
