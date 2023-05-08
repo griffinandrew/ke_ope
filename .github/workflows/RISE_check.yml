@@ -32,11 +32,11 @@ jobs:
           cat ./test.spec.js
           docker exec stable ./test.spec.js
 
-      - name: run cypress test
-        uses: docker/cli-action@v2
-        with:
-          image: cypress/base:ubuntu18-node12.14.1
-          entrypoint: ["cypress", "run", "--spec", "./test.spec.js"]
+          #- name: run cypress test
+          #uses: docker/cli-action@v2
+          #with:
+          #image: cypress/base:ubuntu18-node12.14.1
+          #entrypoint: ["cypress", "run", "--spec", "./test.spec.js"]
       - name: stop container
         run: |
            docker stop stable
