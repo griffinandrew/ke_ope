@@ -31,18 +31,17 @@ jobs:
           docker ps -a 
           echo "sleeping"
           sleep 15
-          
+          docker ps -a
           cat ./test.spec.js
           docker exec stable ./test.spec.js
-
+          sleep 5
+          docker ps -a
           #- name: run cypress test
           #uses: docker/cli-action@v2
           #with:
           #image: cypress/base:ubuntu18-node12.14.1
           #entrypoint: ["cypress", "run", "--spec", "./test.spec.js"]
-      - name: stop container
-        run: |
-           docker stop stable
+          #docker stop stable
 
 
 
