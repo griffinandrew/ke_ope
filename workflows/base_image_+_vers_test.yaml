@@ -17,6 +17,9 @@ jobs:
           pip install jupyter-book matplotlib numpy pandas jq
       - name: make build # makes the container image build 
         run: |
+          IMAGE=quay.io/rh_ee_keli/ucsls:stable-base-ope-latest
+          docker pull $IMAGE
+          docker image ls
           make build
       - name: get base image and version
         run: |
@@ -32,4 +35,3 @@ jobs:
                 echo "INCORRECT IMAGE or VERSION, $REPO_TAG is not the proper image $IMAGE"
                 exit -1
           fi
-

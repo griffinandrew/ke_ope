@@ -3,7 +3,7 @@ on:
   push:
     branches: base-ope-image
 jobs:
-  checksum:
+  rise-check:
     runs-on: ubuntu-latest #use the latest ubuntu container image 
     steps:
       - uses: actions/checkout@v3
