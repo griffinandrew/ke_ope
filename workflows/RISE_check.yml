@@ -15,7 +15,8 @@ jobs:
         run: |
           #pip install -r requirements.txt    
           pip install jupyter-book matplotlib numpy pandas
-          npm install cypress
+          npm install cypressi
+          cp .github/workflows/specs.js ./specs.js
       - name: pull image
         run: |
           #IMAGE=quay.io/rh_ee_keli/ope:image-template-NERC-test
@@ -27,3 +28,11 @@ jobs:
           #IMAGE=quay.io/rh_ee_keli/ope:image-template-NERC-test
           IMAGE=cypress/base:ubuntu18-node12.14.1
           docker run -d --name stable $IMAGE
+          docker ps -a 
+          cat ./specs.js
+
+      - name: run cypress test
+        uses: docker/cli-action@v2
+        with:
+          image: cypress/base:ubuntu18-node12.14.1
+
