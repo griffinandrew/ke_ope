@@ -20,7 +20,7 @@ jobs:
       - name: pull image
         run: |
           #IMAGE=quay.io/rh_ee_keli/ope:image-template-NERC-test
-          IMAGE=cypress/base:ubuntu18-node12.14.1
+          IMAGE=cypress/base:ubuntu19-node12.14.1
           docker pull $IMAGE
           docker image ls 
       - name: run
@@ -28,7 +28,7 @@ jobs:
           #IMAGE=quay.io/rh_ee_keli/ope:image-template-NERC-test
           IMAGE=cypress/base:ubuntu19-node12.14.1
           docker image ls
-          docker run --cypress stable $IMAGE
+          docker run --name cypress $IMAGE
           docker ps -a 
           docker logs cypress
           echo "sleeping"
