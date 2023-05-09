@@ -1,7 +1,9 @@
 name: RISE check
+
 on:
   push:
     branches: base-ope-image
+
 jobs:
   rise-check:
     runs-on: ubuntu-latest #use the latest ubuntu container image 
@@ -28,7 +30,7 @@ jobs:
         run: |
           #IMAGE=quay.io/rh_ee_keli/ope:image-template-NERC-test
           #IMAGE=cypress/base:ubuntu19-node12.14.1
-          
+
           IMAGE=cypress/included:4.11.0
           docker image ls
           docker run --name cypress $IMAGE
@@ -42,18 +44,9 @@ jobs:
           docker exec cypress cypress run --spec ./test.spec.js
           sleep 5
           docker ps -a
-          #- name: run cypress test
-          #uses: docker/cli-action@v2
-          #with:
-          #image: cypress/base:ubuntu18-node12.14.1
-          #entrypoint: ["cypress", "run", "--spec", "./test.spec.js"]
-          #docker stop stable
-        container: cypress/included:4.11.0
-        steps:
-          - uses: actions/checkout@v1
-          - run: cypress run 
-
-
-
-
-
+          
+      - name: run cypress test
+        uses: docker/cli-action@v2
+        with:
+          image: cypress/base:ubuntu18-node12.14.1
+          entrypoint: ["cypress", "run", "--spec", "./test.spec.js"]
