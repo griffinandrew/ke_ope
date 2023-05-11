@@ -43,9 +43,13 @@ PUBLIC_REG := $(shell cat base/ope_book_registry)/
 PUBLIC_IMAGE := $(PUBLIC_USER)/$(OPE_BOOK)
 PUBLIC_STABLE_TAG := :stable-$(CUST)
 PUBLIC_TEST_TAG := :test-$(CUST)
-OPE_BETA_TAG := :beta-$(CUST)
 
-BASE_DISTRO_PACKAGES := $(shell cat base/distro_pkgs)
+
+OPE_REGISTRY_USER := $(shell echo $(REGISTRY_USER))
+OPE_REGISTRY := $(shell echo $(REGISTRY))/
+OPE_IMAGE := $(REGISTRY_USER)/$(OPE_BOOK)
+OPE_TAG := :$(CUST)
+OPE_BETA_TAG := :beta-$(CUST)
 
 # use recursive assignment to defer execution until we have mamba versions made
 PYTHON_PREREQ_VERSIONS_STABLE =  $(shell cat base/python_prereqs)
