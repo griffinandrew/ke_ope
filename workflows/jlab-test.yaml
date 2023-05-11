@@ -1,0 +1,126 @@
+name: jupyter nb test
+on:
+  push:
+    branches: base-ope-image #might need to change to be test-book
+    #env: IMAGE:quay.io/rh_ee_keli/ope:image-template-NERC-test
+jobs:
+  jup-nb:
+    runs-on: ubuntu-latest #use the latest ubuntu container image 
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4 #use action to install python
+        with:
+          python-version: "3.9"
+      - name: Install dependencies #requirements docs unable to read, hard installing dependencies 
+        run: |
+          #pip install -r requirements.txt    
+          pip install jupyter-book matplotlib numpy pandas ipywidgets notebook nbconvert p2j
+          cp .github/workflows/import_test.ipynb ./test.ipynb
+          cp .github/workflows/import_test.py ./test_sc.py    
+          cp .github/workflows/stop.sh ./stop.sh
+          cp .github/workflows/import.ipynb ./import.ipynb
+          cp .github/workflows/ip_jnb.ipynb ./ip_jnb.ipynb
+      - name: check health
+        run: |
+          #IMAGE=quay.io/rh_ee_keli/ucsls:stable-base-ope-latest
+          IMAGE=quay.io/rh_ee_keli/ope:image-template-NERC-test
+          docker pull $IMAGE
+          docker image ls
+          echo "running"
+          docker run -d --name test $IMAGE # use a different port number here
+          echo "done running"
+          sleep 10
+          echo "ps -a" 
+          docker ps -a  
+          echo "quitting"
+          docker stop test
+
+      - name: run
+        run: |
+      
+          IMAGE=quay.io/rh_ee_keli/ope:image-template-NERC-test
+          echo "running"
+          docker run -d --name stable -p 8888:8888 $IMAGE #--ip 0.0.0.0 --no-browser
+          
+          #jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
+          echo "done running"
+          #.github/workflows/test_script.sh #run the container and run the shell script, this might need to be a path within the github workflow file
+          echo "sleep"
+          sleep 10
+          #LINK=file:///home/jovyan/.local/share/jupyter/runtime/jpserver-7-open.html
+          
+          #echo "with loop" 
+          
+          #cat ./test.py
+
+          #echo "cp"
+
+          #cat ./test_sc.py
+          #cat ./stop.ipynb
+          #cat ./test.ipynb
+          #cat ./stop.ipynb
+
+          echo "ps -a" 
+          docker ps -a  
+          echo "chmod"
+          chmod +x ./test_sc.py
+          echo "1 done"
+          chmod +x ./test.ipynb
+          echo "2 done"
+          chmod +x ./stop.sh
+          echo "3 done"
+          chmod +x ./import.ipynb
+          echo "4 done"
+          chmod +x ./ip_jnb.ipynb
+          echo "5 done"
+          TEST=$( ./test_sc.py)
+          #echo "test 1 set" 
+
+          #TEST2=$( ./test.ipynb)
+          #TEST3=$( ./stop.sh)
+          #TEST4=$( ./import.ipynb)
+          echo "test 5 "
+          #TEST5=$( ./ip_jnb.ipynb)
+          
+          IPYNB=$(p2j test_sc.py)
+          FILE=$IPYNB
+          echo "$FILE is converted"
+          echo "test 5 done"
+
+          echo "ps -a"
+          docker ps -a
+          echo "should be listed"
+          ##docker exec stable pwd
+          #docker exec stable ls
+          #docker exec stable python $TEST
+          
+          echo "starting nb"
+          # docker exec -d stable jupyter notebook --no-browser --ip 0.0.0.0 --NotebookApp.token=""
+          docker exec -d stable jupyter notebook --allow-root --no-browser --ip 0.0.0.0 --NotebookApp.token='' --port 8888
+          
+          sleep 10
+          echo "done sleep, listing"
+          docker ps -a
+
+
+          echo "see if .ipynb is there "
+          ls
+          echo "chmod ipynb"
+          chmod +x test_sc.ipynb
+          echo "exec and run"
+          
+
+          docker exec -d stable jupyter nbconvert --execute --output /dev/null test_sc.ipynb --execute "--ExecutePreprocessor.timeout=-1"
+          echo "sleeping"
+          sleep 30
+          docker ps -a 
+
+          container_id=$(docker ps -q | head -n 1)
+          echo $container_id
+          token=$(docker exec $container_id jupyter lab list 2>&1 | grep -o "token=[^ ]*" | cut -d= -f2)
+          python3 $TEST $token
+          docker stop stable
+	 
+          #docker logs stable
+          #docker inspect stable
