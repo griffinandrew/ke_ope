@@ -43,6 +43,7 @@ PUBLIC_REG := $(shell cat base/ope_book_registry)/
 PUBLIC_IMAGE := $(PUBLIC_USER)/$(OPE_BOOK)
 PUBLIC_STABLE_TAG := :stable-$(CUST)
 PUBLIC_TEST_TAG := :test-$(CUST)
+OPE_BETA_TAG := :beta-$(CUST)
 
 BASE_DISTRO_PACKAGES := $(shell cat base/distro_pkgs)
 
@@ -172,6 +173,9 @@ pull: DARGS ?=
 pull: ## pull most recent public version
 	docker pull $(REG)$(IMAGE)$(TAG)
 
+pull-beta: ## pull most recent beta version
+	docker pull $(OPE_REGISTRY)$(OPE_IMAGE)$(OPE_BETA_TAG)
+
 pull-priv: IMAGE = $(PRIVATE_IMAGE)
 pull-priv: REG = $(PRIVATE_REG)
 pull-priv: TAG = $(PRIVATE_TAG)
@@ -219,6 +223,12 @@ run: PORT ?= 8888
 run: ## start published version with jupyter lab interface
 	docker run -it --rm -p $(PORT):$(PORT) $(DARGS) $(REG)$(IMAGE)$(TAG) $(ARGS) 
 
+
+run-beta: ARGS ?=
+run-beta: DARGS ?= -u $(OPE_UID):$(OPE_GID) -v "${HOST_DIR}":"${MOUNT_DIR}" -p ${SSH_PORT}:22
+run-beta: PORT ?= 8888
+run-beta: ## start published version with jupyter lab interface
+	docker run --rm -p $(PORT):$(PORT) $(DARGS) $(OPE_REGISTRY)$(OPE_IMAGE)$(OPE_BETA_TAG) $(ARGS)
 
 run-priv: IMAGE = $(PRIVATE_IMAGE)
 run-priv: REG = $(PRIVATE_REG)

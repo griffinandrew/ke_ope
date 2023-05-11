@@ -24,7 +24,8 @@ jobs:
       - name: check health
         run: |
           #IMAGE=quay.io/rh_ee_keli/ucsls:stable-base-ope-latest
-          IMAGE=quay.io/rh_ee_keli/ope:image-template-NERC-test
+          IMAGE=quay.io/rh_ee_keli/ope:beta-image-template-NERC-test
+          #IMAGE=quay.io/rh_ee_keli/ope:image-template-NERC-test
           docker pull $IMAGE
           docker image ls
           echo "running"
@@ -38,8 +39,11 @@ jobs:
 
       - name: run
         run: |
+
+
       
-          IMAGE=quay.io/rh_ee_keli/ope:image-template-NERC-test
+          #IMAGE=quay.io/rh_ee_keli/ope:image-template-NERC-test
+          IMAGE=quay.io/rh_ee_keli/ope:beta-image-template-NERC-test
           echo "running"
           docker run -d --name stable -p 8888:8888 $IMAGE #--ip 0.0.0.0 --no-browser
           
@@ -116,10 +120,24 @@ jobs:
           sleep 30
           docker ps -a 
 
-          container_id=$(docker ps -q | head -n 1)
-          echo $container_id
-          token=$(docker exec $container_id jupyter lab list 2>&1 | grep -o "token=[^ ]*" | cut -d= -f2)
-          python3 $TEST $token
+          #container_id=$(docker ps -q | head -n 1)
+          #echo $container_id
+          #token=$(docker exec $container_id jupyter lab list 2>&1 | grep -o "token=[^ ]*" | cut -d= -f2)
+          #python3 $TEST $token
           docker stop stable 
           #docker logs stable
           #docker inspect stable
+
+
+      - name: beta
+        run: | 
+          make pull-beta
+          make run-beta &
+          sleep 3
+          container_id=$(docker ps -q | head -n 1)
+          echo $container_id
+          token=$(docker exec $container_id jupyter lab list 2>&1 | grep -o "token=[^ ]*" | cut -d= -f2)
+          TEST=$( ./test_sc.py)
+          chmod +x ./test_sc.py 
+
+          python3 $TEST $token
