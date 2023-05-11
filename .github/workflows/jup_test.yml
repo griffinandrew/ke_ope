@@ -114,15 +114,12 @@ jobs:
           echo "sleeping"
           sleep 30
           docker ps -a 
-        
-	  container_id=$(docker ps -q | head -n 1)
+
+          container_id=$(docker ps -q | head -n 1)
           echo $container_id
           token=$(docker exec $container_id jupyter lab list 2>&1 | grep -o "token=[^ ]*" | cut -d= -f2)
           python3 $TEST $token
-	   
-          #docker logs stable
-          #docker inspect stable
           docker stop stable
+	 
           #docker logs stable
           #docker inspect stable
-
