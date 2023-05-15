@@ -1,0 +1,362 @@
+name: package version check
+on:
+  push:
+    branches: base-ope-image
+jobs:
+  pack-vers-check:
+    runs-on: ubuntu-latest #use the latest ubuntu container image 
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4 #use action to install python
+        with:
+          python-version: "3.9"
+      - name: Install dependencies #requirements docs unable to read, hard installing dependencies 
+        run: |
+          #pip install -r requirements.txt
+          pip install jupyter-book matplotlib numpy pandas
+      - name: make build
+        run: |
+          make build
+      - name: checkout package versions
+        run: |
+          pip freeze > ./freeze.txt 
+          echo "iterating through freeze.txt"
+          #**********************************************************************
+          ##NOTE: exact versions will need to be changed to the standarized image
+          #**********************************************************************
+          incorrect_package_count=0
+          cat freeze.txt | while read line
+          do 
+            case $line in
+              accessible-pygments==0.0.4)
+                echo "CORRECT version of package: $line"
+                echo 0 > count.txt #adding this to avoid file not found error during conditional check 
+                ;;
+              alabaster==0.7.13)
+                echo "CORRECT version of package: $line"
+                ;;
+              asttokens==2.2.1)
+                echo "CORRECT version of package: $line"
+                ;;
+              attrs==23.1.0)
+                echo "CORRECT version of package: $line"
+                ;;
+              Babel==2.12.1)
+                echo "CORRECT version of package: $line"
+                ;;
+              backcall==0.2.0)
+                echo "CORRECT version of package: $line"
+                ;;
+              beautifulsoup4==4.12.2)
+                echo "CORRECT version of package: $line"
+                ;;
+              certifi==2023.5.7)
+                echo "CORRECT version of package: $line"
+                ;;
+              charset-normalizer==3.1.0)
+                echo "CORRECT version of package: $line"
+                ;;
+              click==8.1.3)
+                echo "CORRECT version of package: $line"
+                ;;
+              comm==0.1.3)
+                echo "CORRECT version of package: $line"
+                ;;
+              contourpy==1.0.7)
+                echo "CORRECT version of package: $line"
+                ;;
+              cycler==0.11.0)
+                echo "CORRECT version of package: $line"
+                ;;
+              debugpy==1.6.7)
+                echo "CORRECT version of package: $line"
+                ;;
+              decorator==5.1.1)
+                echo "CORRECT version of package: $line"
+                ;;
+              docutils==0.18.1)
+                echo "CORRECT version of package: $line"
+                ;;
+              executing==1.2.0)
+                echo "CORRECT version of package: $line"
+                ;;
+              fastjsonschema==2.16.3)
+                echo "CORRECT version of package: $line"
+                ;;
+              fonttools==4.39.4)
+                echo "CORRECT version of package: $line"
+                ;;
+              greenlet==2.0.2)
+                echo "CORRECT version of package: $line"
+                ;;
+              idna==3.4)
+                echo "CORRECT version of package: $line"
+                ;;
+              imagesize==1.4.1)
+                echo "CORRECT version of package: $line"
+                ;;
+              importlib-metadata==6.6.0)
+                echo "CORRECT version of package: $line"
+                ;;
+              importlib-resources==5.12.0)
+                echo "CORRECT version of package: $line"
+                ;;
+              ipykernel==6.23.1)
+                echo "CORRECT version of package: $line"
+                ;;
+              ipython==8.13.2)
+                echo "CORRECT version of package: $line"
+                ;;
+              jedi==0.18.2)
+                echo "CORRECT version of package: $line"
+                ;;
+              Jinja2==3.1.2)
+                echo "CORRECT version of package: $line"
+                ;;
+              jsonschema==4.17.3)
+                echo "CORRECT version of package: $line"
+                ;;
+              jupyter-book==0.15.1)
+                echo "CORRECT version of package: $line"
+                ;;
+              jupyter-cache==0.6.1)
+                echo "CORRECT version of package: $line"
+                ;;
+              jupyter_client==8.2.0)
+                echo "CORRECT version of package: $line"
+                ;;
+              jupyter_core==5.3.0)
+                echo "CORRECT version of package: $line"
+                ;;
+              kiwisolver==1.4.4)
+                echo "CORRECT version of package: $line"
+                ;;
+              latexcodec==2.0.1)
+                echo "CORRECT version of package: $line"
+                ;;
+              linkify-it-py==2.0.2)
+                echo "CORRECT version of package: $line"
+                ;;
+              markdown-it-py==2.2.0)
+                echo "CORRECT version of package: $line"
+                ;;
+              MarkupSafe==2.1.2)
+                echo "CORRECT version of package: $line"
+                ;;
+              comm==0.1.2)
+                echo "CORRECT version of package: $line"
+                ;;
+              matplotlib==3.7.1)
+                echo "CORRECT version of package: $line"
+                ;;
+              matplotlib-inline==0.1.6)
+                echo "CORRECT version of package: $line"
+                ;;
+              mdit-py-plugins==0.3.5)
+                echo "CORRECT version of package: $line"
+                ;;
+              mdurl==0.1.2)
+                echo "CORRECT version of package: $line"
+                ;;
+              myst-nb==0.17.2)
+                echo "CORRECT version of package: $line"
+                ;;
+              myst-parser==0.18.1)
+                echo "CORRECT version of package: $line"
+                ;;
+              nbclient==0.7.4)
+                echo "CORRECT version of package: $line"
+                ;;
+              nbformat==5.8.0)
+                echo "CORRECT version of package: $line"
+                ;;
+              nest-asyncio==1.5.6)
+                echo "CORRECT version of package: $line"
+                ;;
+              numpy==1.24.3)
+                echo "CORRECT version of package: $line"
+                ;;
+              packaging==23.1)
+                echo "CORRECT version of package: $line"
+                ;;
+              pandas==2.0.1)
+                echo "CORRECT version of package: $line"
+                ;;
+              parso==0.8.3)
+                echo "CORRECT version of package: $line"
+                ;;
+              pexpect==4.8.0)
+                echo "CORRECT version of package: $line"
+                ;;
+              pickleshare==0.7.5)
+                echo "CORRECT version of package: $line"
+                ;;
+              Pillow==9.5.0)
+                echo "CORRECT version of package: $line"
+                ;;
+              platformdirs==3.5.1)
+                echo "CORRECT version of package: $line"
+                ;;
+              prompt-toolkit==3.0.38)
+                echo "CORRECT version of package: $line"
+                ;;
+              psutil==5.9.5)
+                echo "CORRECT version of package: $line"
+                ;;
+              ptyprocess==0.7.0)
+                echo "CORRECT version of package: $line"
+                ;;
+              pure-eval==0.2.2)
+                echo "CORRECT version of package: $line"
+                ;;
+              pybtex==0.24.0)
+                echo "CORRECT version of package: $line"
+                ;;
+              pybtex-docutils==1.0.2)
+                echo "CORRECT version of package: $line"
+                ;;
+              pydata-sphinx-theme==0.13.3)
+                echo "CORRECT version of package: $line"
+                ;;
+              Pygments==2.15.1)
+                echo "CORRECT version of package: $line"
+                ;;
+              pyparsing==3.0.9)
+                echo "CORRECT version of package: $line"
+                ;;
+              pyrsistent==0.19.3)
+                echo "CORRECT version of package: $line"
+                ;;
+              python-dateutil==2.8.2)
+                echo "CORRECT version of package: $line"
+                ;;
+              pytz==2023.3)
+                echo "CORRECT version of package: $line"
+                ;;
+              PyYAML==6.0)
+                echo "CORRECT version of package: $line"
+                ;;
+              pyzmq==25.0.2)
+                echo "CORRECT version of package: $line"
+                ;;
+              requests==2.30.0)
+                echo "CORRECT version of package: $line"
+                ;;
+              six==1.16.0)
+                echo "CORRECT version of package: $line"
+                ;;
+              snowballstemmer==2.2.0)
+                echo "CORRECT version of package: $line"
+                ;;
+              soupsieve==2.4.1)
+                echo "CORRECT version of package: $line"
+                ;;
+              Sphinx==5.0.2)
+                echo "CORRECT version of package: $line"
+                ;;
+              sphinx-book-theme==1.0.1)
+                echo "CORRECT version of package: $line"
+                ;;
+              sphinx-comments==0.0.3)
+                echo "CORRECT version of package: $line"
+                ;;
+              sphinx-copybutton==0.5.2)
+                echo "CORRECT version of package: $line"
+                ;;
+              sphinx-jupyterbook-latex==0.5.2)
+                echo "CORRECT version of package: $line"
+                ;;
+              sphinx-multitoc-numbering==0.1.3)
+                echo "CORRECT version of package: $line"
+                ;;
+              sphinx-thebe==0.2.1)
+                echo "CORRECT version of package: $line"
+                ;;
+              sphinx-togglebutton==0.3.2)
+                echo "CORRECT version of package: $line"
+                ;;
+              sphinx_design==0.3.0)
+                echo "CORRECT version of package: $line"
+                ;;
+              sphinx_external_toc==0.3.1)
+                echo "CORRECT version of package: $line"
+                ;;
+              sphinxcontrib-applehelp==1.0.4)
+                echo "CORRECT version of package: $line"
+                ;;
+              sphinxcontrib-bibtex==2.5.0)
+                echo "CORRECT version of package: $line"
+                ;;
+              sphinxcontrib-devhelp==1.0.2)
+                echo "CORRECT version of package: $line"
+                ;;
+              sphinxcontrib-htmlhelp==2.0.1)
+                echo "CORRECT version of package: $line"
+                ;;
+              sphinxcontrib-jsmath==1.0.1)
+                echo "CORRECT version of package: $line"
+                ;;
+              sphinxcontrib-qthelp==1.0.3)
+                echo "CORRECT version of package: $line"
+                ;;
+              sphinxcontrib-serializinghtml==1.1.5)
+                echo "CORRECT version of package: $line"
+                ;;
+              SQLAlchemy==2.0.13)
+                echo "CORRECT version of package: $line"
+                ;;
+              stack-data==0.6.2)
+                echo "CORRECT version of package: $line"
+                ;;
+              tabulate==0.9.0)
+                echo "CORRECT version of package: $line"
+                ;;
+              tornado==6.3.2)
+                echo "CORRECT version of package: $line"
+                ;;
+              traitlets==5.9.0)
+                echo "CORRECT version of package: $line"
+                ;;
+              typing_extensions==4.5.0)
+                echo "CORRECT version of package: $line"
+                ;;
+              tzdata==2023.3)
+                echo "CORRECT version of package: $line"
+                ;;
+              uc-micro-py==1.0.2)
+                echo "CORRECT version of package: $line"
+                ;;
+              urllib3==2.0.2)
+                echo "CORRECT version of package: $line"
+                ;;
+              wcwidth==0.2.6)
+                echo "CORRECT version of package: $line"
+                ;;
+              zipp==3.15.0)
+                echo "CORRECT version of package: $line"
+                ;;
+              *)
+                echo ""
+                echo "ERROR:"
+                echo "INCORRECT version of package: $line"
+                echo ""
+                incorrect_package_count=$((incorrect_package_count+1))
+                echo $incorrect_package_count > count.txt
+                echo $line >> incorrect_package_list.txt
+                ;;
+            esac
+          done
+          incorr_count=$( cat count.txt )
+          if [ "$incorr_count" -gt  "0" ]; then
+                echo "" 
+                echo "TEST FAILURE: there are $incorr_count package version(s) that are INCORRECT"
+                echo "DISPLAYING INCORRECT PACKAGE VERSION(S)"
+                echo ""
+                cat incorrect_package_list.txt
+                exit 1
+          else 
+                echo ""
+                echo "TEST SUCCESS"
+                echo "all packages are the correct version"
+          fi
