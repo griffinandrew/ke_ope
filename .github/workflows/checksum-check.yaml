@@ -1,0 +1,44 @@
+name: checksum
+on:
+  push:
+    branches: base-ope-image
+jobs:
+  checksum:
+    runs-on: ubuntu-latest #use the latest ubuntu container image 
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4 #use action to install python
+        with:
+          python-version: "3.9"
+      - name: Install dependencies #requirements docs unable to read, hard installing dependencies 
+        run: |
+          #pip install -r requirements.txt    
+          pip install jupyter-book matplotlib numpy pandas
+      - name: make build # makes the container image build and then creates var with checksum value to be compared 
+        run: |
+          make build
+      - name: run checksum #creates var with checksum value to be compared 
+        run: |
+          sha256sum > checksum.txt
+          cat checksum.txt
+          echo "VERIFYING IMAGE CHECKSUM"
+          PERMISSIONS_CHECKSUM=$( cat permissions_checksum.txt )
+          echo "displaying the pulled image checksum: $PERMISSIONS_CHECKSUM "
+          QUICK_TRIM=${PERMISSIONS_CHECKSUM::64} #quick_trim is used to get rid of the tailing "-" after the checksum
+          echo "displaying modified checksum: $QUICK_TRIM "
+          echo "COMPARING PULLED IMAGE CHECKSUM WITH CORRECT IMAGE CHECKSUM"
+          #*********************************************
+          #need to insert correct image CHECKSUM val to compare
+          #*********************************************
+          CHECKSUM=df1fa1bb7ecfee394e23a12a6443e2410e4aa7b3c1c3ce0d36eb26ecc8713367
+          if [["$QUICK_TRIM == $CHECKSUM"]]; then
+                echo "VERIFICATION COMPLETE"
+                echo "SUCCESS" 
+                echo "checksum = $QUICK_TRIM"
+          else 
+                echo "VERIFICATION COMPLETE"
+                echo "FAILURE"
+                echo "checksum = $QUICK_TRIM does not match the correct image checksum = $CHECKSUM"
+                exit 1
+          fi

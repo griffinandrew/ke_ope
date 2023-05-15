@@ -1,0 +1,39 @@
+name: ID-check
+on:
+  push:
+    branches: base-ope-image
+jobs:
+  id-check:
+    runs-on: ubuntu-latest #use the latest ubuntu container image 
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4 #use action to install python
+        with:
+          python-version: "3.9"
+      - name: Install dependencies #requirements docs unable to read, hard installing dependencies 
+        run: |
+          #pip install -r requirements.txt    
+          pip install jupyter-book matplotlib numpy pandas
+      - name: pull image
+        run: |
+          IMAGE=quay.io/rh_ee_keli/ope:image-template-NERC-test
+          docker pull $IMAGE
+          docker image ls 
+      - name: run
+        run: |
+          IMAGE=quay.io/rh_ee_keli/ope:image-template-NERC-test
+          docker run -d --name stable $IMAGE
+          #UID=$(id -u)
+          #GID=$(ig -g)
+          #$UID
+          #$GID
+          id -u 
+          id -g
+          docker exec stable id -u
+          docker exec stable id -g
+          #IM_UID=$(docker exec stable id -u)
+          #IM_GID=$(docker exec stable id -g)
+          #$IM_UID
+          #$IM_GID
+
