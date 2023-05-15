@@ -1,9 +1,9 @@
-name: container start test
+name: health check
 on:
   push:
     branches: base-ope-image
 jobs:
-  container_start:
+  health-check:
     runs-on: ubuntu-latest #use the latest ubuntu container image 
     steps:
       - uses: actions/checkout@v3

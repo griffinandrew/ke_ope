@@ -1,9 +1,9 @@
-name: base image and version test
+name: image and version test
 on:
   push:
     branches: base-ope-image
 jobs:
-  image_version_check:
+  image-version-check:
     runs-on: ubuntu-latest #use the latest ubuntu container image 
     steps:
       - uses: actions/checkout@v3
